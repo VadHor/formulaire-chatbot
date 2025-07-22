@@ -393,7 +393,7 @@
 
     <script>
         // Configuration Google Sheets
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwr0MkIJrHjuuQYowE_b0D3Vl1SYhbDL1kLkPFv2mSRFMiW76zodBAUULe5xtNbQak7/exec';
+        const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScxGHyXb6oKohiRsOJSJph6kUnKAwdXdbsn15HRDEq4Q/formResponse';
         
         let savedQuestions = JSON.parse(localStorage.getItem('chatbotQuestions') || '[]');
         
@@ -478,52 +478,39 @@
         
         // Envoi vers Google Sheets
         async function sendToGoogleSheets() {
-            if (savedQuestions.length === 0) {
-                showMessage('❌ Aucune question sauvegardée à envoyer', 'warning');
-                return;
-            }
+    if (savedQuestions.length === 0) {
+        showMessage('❌ Aucune question sauvegardée à envoyer', 'warning');
+        return;
+    }
+    
+    try {
+        showMessage('📤 Envoi en cours vers Google Forms...', 'warning');
+        
+        for (const question of savedQuestions) {
+            const formData = new FormData();
+            formData.append('entry.1234567890', question.userName);
+            formData.append('entry.1234567891', question.questionNum);
+            formData.append('entry.1234567892', question.themes);
+            formData.append('entry.1234567893', question.subTheme);
+            formData.append('entry.1234567894', question.questionAsked);
+            formData.append('entry.1234567895', question.botResponse);
+            formData.append('entry.1234567896', question.expectedResponse);
+            formData.append('entry.1234567897', question.comments || '');
             
-            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'VOTRE_URL_SCRIPT_GOOGLE_ICI') {
-                showMessage('⚠️ URL Google Script non configurée. Contactez votre administrateur.', 'warning');
-                return;
-            }
-            
-            try {
-                showMessage('📤 Envoi en cours vers Google Sheets...', 'warning');
-                
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        questions: savedQuestions,
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent
-                    })
-                });
-                
-                if (response.ok) {
-                    const result = await response.text();
-                    showMessage('✅ Données envoyées avec succès vers Google Sheets !');
-                    
-                    // Option : vider les données locales après envoi réussi
-                    if (confirm('✅ Envoi réussi ! Voulez-vous vider les données locales ?')) {
-                        localStorage.removeItem('chatbotQuestions');
-                        savedQuestions = [];
-                        document.getElementById('chatbotForm').reset();
-                        updateProgress();
-                        showMessage('🗑️ Données locales supprimées');
-                    }
-                } else {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
-                }
-                
-            } catch (error) {
-                console.error('Erreur envoi Google Sheets:', error);
-                showMessage('❌ Erreur lors de l\'envoi. Vérifiez votre connexion internet.', 'warning');
-            }
+            await fetch(GOOGLE_FORM_URL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            });
         }
+        
+        showMessage('✅ Données envoyées avec succès vers Google Forms !');
+        
+    } catch (error) {
+        console.error('Erreur envoi Google Forms:', error);
+        showMessage('❌ Erreur lors de l\'envoi.', 'warning');
+    }
+}
         
         // Export en PDF
         function exportToPDF() {
