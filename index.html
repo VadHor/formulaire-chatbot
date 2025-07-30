@@ -14,7 +14,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8fafc;
             min-height: 100vh;
             padding: 20px;
         }
@@ -23,15 +23,15 @@
             max-width: 800px;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             overflow: hidden;
         }
         
         .header {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: #4f46e5;
             color: white;
-            padding: 30px;
+            padding: 24px;
             text-align: center;
         }
         
@@ -46,63 +46,63 @@
         }
         
         .form-content {
-            padding: 40px;
+            padding: 32px;
         }
         
         .progress-bar {
-            background: #ecf0f1;
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 30px;
+            background: #f1f5f9;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 24px;
             overflow: hidden;
         }
         
         .progress-fill {
-            background: linear-gradient(90deg, #3498db, #2ecc71);
+            background: #4f46e5;
             height: 100%;
             width: 0%;
             transition: width 0.3s ease;
         }
         
         .question-group {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: #fafbfc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
         
         .question-group.active {
-            background: #e3f2fd;
-            border-left-color: #2196f3;
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+            background: #f8faff;
+            border-color: #4f46e5;
         }
         
         label {
             display: block;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 1.05em;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+            font-size: 1em;
         }
         
         .required {
-            color: #e74c3c;
+            color: #ef4444;
         }
         
         input[type="text"], input[type="email"], select, textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.3s ease;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.95em;
+            transition: all 0.2s ease;
+            background: white;
         }
         
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
         
         textarea {
@@ -120,21 +120,22 @@
         .checkbox-item {
             display: flex;
             align-items: center;
-            padding: 10px;
+            padding: 8px 12px;
             background: white;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
             transition: all 0.2s ease;
         }
         
         .checkbox-item:hover {
-            background: #f0f8ff;
-            border-color: #3498db;
+            background: #f9fafb;
+            border-color: #d1d5db;
         }
         
         .checkbox-item input[type="checkbox"] {
             width: auto;
             margin-right: 8px;
+            accent-color: #4f46e5;
         }
         
         .button-group {
@@ -145,93 +146,107 @@
         }
         
         button {
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: 600;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         
         .btn-save {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+            background: #f59e0b;
             color: white;
         }
         
         .btn-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
+            background: #d97706;
+            transform: translateY(-1px);
         }
         
         .btn-send {
-            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            background: #8b5cf6;
             color: white;
         }
         
         .btn-send:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
+            background: #7c3aed;
+            transform: translateY(-1px);
         }
         
         .btn-export {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: #10b981;
             color: white;
         }
         
         .btn-export:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+            background: #059669;
+            transform: translateY(-1px);
         }
         
         .btn-clear {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: #ef4444;
             color: white;
         }
         
         .btn-clear:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+            background: #dc2626;
+            transform: translateY(-1px);
         }
         
         .status-message {
             text-align: center;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 600;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-weight: 500;
         }
         
         .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
         }
         
         .warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
+            background: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fde68a;
         }
         
         .question-counter {
-            background: #3498db;
+            background: #4f46e5;
             color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
         
         .help-text {
-            font-size: 0.9em;
-            color: #7f8c8d;
-            margin-top: 5px;
-            font-style: italic;
+            font-size: 0.85em;
+            color: #6b7280;
+            margin-top: 4px;
+            font-style: normal;
         }
         
-            @media (max-width: 768px) {
+        .subtheme-section {
+            margin: 16px 0;
+            padding: 16px;
+            background: #fefefe;
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+        
+        .subtheme-section.absences { border-left-color: #3b82f6; }
+        .subtheme-section.annulation { border-left-color: #ef4444; }
+        .subtheme-section.conseil { border-left-color: #f59e0b; }
+        .subtheme-section.controle { border-left-color: #10b981; }
+        
+        @media (max-width: 768px) {
             .form-content {
                 padding: 20px;
             }
@@ -307,38 +322,86 @@
                     </div>
                 </div>
                 
-                <!-- Sous-thème principal -->
+                <!-- Sous-thèmes concernés -->
                 <div class="question-group">
-                    <label for="subTheme">Sous-thème principal <span class="required">*</span></label>
-                    <select id="subTheme" name="subTheme" required>
-                        <option value="">Sélectionnez un sous-thème...</option>
-                        <!-- Absences -->
-                        <optgroup label="Absences">
-                            <option value="Absence entretien">Absence entretien</option>
-                            <option value="Annonce d'une absence">Annonce d'une absence</option>
-                        </optgroup>
-                        <!-- Annulation -->
-                        <optgroup label="Annulation">
-                            <option value="Annulation d'un dossier">Annulation d'un dossier</option>
-                            <option value="Diagnostic discordant">Diagnostic discordant</option>
-                            <option value="Évaluation approfondie">Évaluation approfondie</option>
-                            <option value="Fin de dossier">Fin de dossier</option>
-                            <option value="Mesures d'insertion">Mesures d'insertion</option>
-                            <option value="Octroi STAFE">Octroi STAFE</option>
-                        </optgroup>
-                        <!-- Conseil -->
-                        <optgroup label="Conseil">
-                            <option value="Stratégie de réinsertion">Stratégie de réinsertion</option>
-                            <option value="Structure des entretiens">Structure des entretiens</option>
-                            <option value="Task Force Entretiens">Task Force Entretiens</option>
-                            <option value="Visioconférence">Visioconférence</option>
-                        </optgroup>
-                        <!-- Contrôle -->
-                        <optgroup label="Contrôle">
-                            <option value="Aptitude au placement">Aptitude au placement</option>
-                            <option value="Restitution des recherches d'emploi">Restitution des recherches d'emploi</option>
-                        </optgroup>
-                    </select>
+                    <label>Sous-thèmes concernés par cette question <span class="required">*</span></label>
+                    <p class="help-text">Cochez tous les sous-thèmes que votre question aborde</p>
+                    
+                    <!-- Absences -->
+                    <h4 style="color: #3b82f6; margin: 15px 0 10px 0; font-size: 1.1em;">📋 Absences</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme1" name="subThemes" value="Absence entretien">
+                            <label for="subtheme1">Absence entretien</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme2" name="subThemes" value="Annonce d'une absence">
+                            <label for="subtheme2">Annonce d'une absence</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Annulation -->
+                    <h4 style="color: #ef4444; margin: 15px 0 10px 0; font-size: 1.1em;">❌ Annulation</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme3" name="subThemes" value="Annulation d'un dossier">
+                            <label for="subtheme3">Annulation d'un dossier</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Conseil -->
+                    <h4 style="color: #f59e0b; margin: 15px 0 10px 0; font-size: 1.1em;">💡 Conseil</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme4" name="subThemes" value="Diagnostic d'insertion">
+                            <label for="subtheme4">Diagnostic d'insertion</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme5" name="subThemes" value="Évaluation approfondie">
+                            <label for="subtheme5">Évaluation approfondie</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme6" name="subThemes" value="Fin de droit">
+                            <label for="subtheme6">Fin de droit</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme7" name="subThemes" value="Mesures d'insertion">
+                            <label for="subtheme7">Mesures d'insertion</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme8" name="subThemes" value="Octroi STAFE">
+                            <label for="subtheme8">Octroi STAFE</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme9" name="subThemes" value="Stratégie de réinsertion">
+                            <label for="subtheme9">Stratégie de réinsertion</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme10" name="subThemes" value="Structure des entretiens">
+                            <label for="subtheme10">Structure des entretiens</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme11" name="subThemes" value="Task Force Entretiens">
+                            <label for="subtheme11">Task Force Entretiens</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme12" name="subThemes" value="Visioconférence">
+                            <label for="subtheme12">Visioconférence</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Contrôle -->
+                    <h4 style="color: #10b981; margin: 15px 0 10px 0; font-size: 1.1em;">🔍 Contrôle</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme13" name="subThemes" value="Aptitude au placement">
+                            <label for="subtheme13">Aptitude au placement</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtheme14" name="subThemes" value="Restitution des recherches d'emploi">
+                            <label for="subtheme14">Restitution des recherches d'emploi</label>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Question posée -->
@@ -362,200 +425,377 @@
                     <label>Documents de référence attendus <span class="required">*</span></label>
                     <p class="help-text">Cochez tous les documents qui devraient être la référence pour cette réponse</p>
                     
-                    <!-- Absences -->
-                    <h4 style="color: #3498db; margin: 15px 0 10px 0; font-size: 1.1em;">📋 Absences</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs1" name="expectedDocuments" value="Entretien avant MMT.docx">
-                            <label for="doc_abs1">Entretien avant MMT.docx</label>
+                    <!-- ABSENCES -->
+                    <div class="subtheme-section absences">
+                        <h4 style="color: #3b82f6; margin: 0 0 15px 0; font-size: 1.2em;">📋 ABSENCES</h4>
+                        
+                        <!-- Absence entretien -->
+                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Absence entretien</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ent1" name="expectedDocuments" value="Entretien avant MMT.docx">
+                                <label for="doc_abs_ent1">Entretien avant MMT.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ent2" name="expectedDocuments" value="DOC 002 Absences EC tableau synthèse.docx">
+                                <label for="doc_abs_ent2">DOC 002 Absences EC tableau synthèse.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ent3" name="expectedDocuments" value="MAR 010 Management transmission au DJ">
+                                <label for="doc_abs_ent3">MAR 010 Management transmission au DJ</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ent4" name="expectedDocuments" value="MAR 003 Annulation dossier DE">
+                                <label for="doc_abs_ent4">MAR 003 Annulation dossier DE</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs2" name="expectedDocuments" value="Entretien de conseil (EC) après MMT">
-                            <label for="doc_abs2">Entretien de conseil (EC) après MMT</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs3" name="expectedDocuments" value="Allégement de conseil et de contrôle.docx">
-                            <label for="doc_abs3">Allégement de conseil et de contrôle.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs4" name="expectedDocuments" value="CPE Adoption.pdf">
-                            <label for="doc_abs4">CPE Adoption.pdf</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs5" name="expectedDocuments" value="APG Allocation à l'autre parent">
-                            <label for="doc_abs5">APG Allocation à l'autre parent</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs6" name="expectedDocuments" value="APG Allocations de maternité.docx">
-                            <label for="doc_abs6">APG Allocations de maternité.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs7" name="expectedDocuments" value="APG Allocations de prise en charge enfants.docx">
-                            <label for="doc_abs7">APG Allocations de prise en charge enfants.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs8" name="expectedDocuments" value="Incapacité de travail.docx">
-                            <label for="doc_abs8">Incapacité de travail.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs9" name="expectedDocuments" value="Jours sans contrôle.docx">
-                            <label for="doc_abs9">Jours sans contrôle.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_abs10" name="expectedDocuments" value="DOC 002 Absences EC tableau synthèse.docx">
-                            <label for="doc_abs10">DOC 002 Absences EC tableau synthèse.docx</label>
-                        </div>
-                    </div>
-                    
-                    <!-- Annulation -->
-                    <h4 style="color: #e74c3c; margin: 15px 0 10px 0; font-size: 1.1em;">❌ Annulation</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann1" name="expectedDocuments" value="Effectuer une annulation.docx">
-                            <label for="doc_ann1">Effectuer une annulation.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann2" name="expectedDocuments" value="1er entretien de conseil (Diag).docx">
-                            <label for="doc_ann2">1er entretien de conseil (Diag).docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann3" name="expectedDocuments" value="Evaluation approfondie.docx">
-                            <label for="doc_ann3">Evaluation approfondie.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann4" name="expectedDocuments" value="Fin d'indemnisation.docx">
-                            <label for="doc_ann4">Fin d'indemnisation.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann5" name="expectedDocuments" value="Mesures d'insertion.docx">
-                            <label for="doc_ann5">Mesures d'insertion.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann6" name="expectedDocuments" value="Octroyer un STAFE.docx">
-                            <label for="doc_ann6">Octroyer un STAFE.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann7" name="expectedDocuments" value="DOC 006 Annulation dossiers morts et délais">
-                            <label for="doc_ann7">DOC 006 Annulation dossiers morts et délais</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ann8" name="expectedDocuments" value="DOC 007 Checklist EC">
-                            <label for="doc_ann8">DOC 007 Checklist EC</label>
-                        </div>
-                    </div>
-                    
-                    <!-- Conseil -->
-                    <h4 style="color: #f39c12; margin: 15px 0 10px 0; font-size: 1.1em;">💡 Conseil</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons1" name="expectedDocuments" value="Etablir la stratégie.docx">
-                            <label for="doc_cons1">Etablir la stratégie.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons2" name="expectedDocuments" value="Fiches pratiques - Critères d'employabilité.docx">
-                            <label for="doc_cons2">Fiches pratiques - Critères d'employabilité.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons3" name="expectedDocuments" value="Nomenclature des objectifs.docx">
-                            <label for="doc_cons3">Nomenclature des objectifs.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons4" name="expectedDocuments" value="Structure des entretiens.docx">
-                            <label for="doc_cons4">Structure des entretiens.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons5" name="expectedDocuments" value="Task Force EC.docx">
-                            <label for="doc_cons5">Task Force EC.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons6" name="expectedDocuments" value="Guide et consignes.docx">
-                            <label for="doc_cons6">Guide et consignes.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons7" name="expectedDocuments" value="MAR 010 Management transmission au DJ">
-                            <label for="doc_cons7">MAR 010 Management transmission au DJ</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons8" name="expectedDocuments" value="MAR 003 Annulation dossier DE">
-                            <label for="doc_cons8">MAR 003 Annulation dossier DE</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons9" name="expectedDocuments" value="MAR 005 Evénement">
-                            <label for="doc_cons9">MAR 005 Evénement</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_cons10" name="expectedDocuments" value="MAR 006 Réinsertion Plan actions">
-                            <label for="doc_cons10">MAR 006 Réinsertion Plan actions</label>
+                        
+                        <!-- Annonce d'une absence -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Annonce d'une absence</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann1" name="expectedDocuments" value="Entretien de conseil (EC) après MMT">
+                                <label for="doc_abs_ann1">Entretien de conseil (EC) après MMT</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann2" name="expectedDocuments" value="Allégement de conseil et de contrôle.docx">
+                                <label for="doc_abs_ann2">Allégement de conseil et de contrôle.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann3" name="expectedDocuments" value="APG Adoption.pdf">
+                                <label for="doc_abs_ann3">APG Adoption.pdf</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann4" name="expectedDocuments" value="APG Allocation à l'autre parent (au père ou à l'épouse de la mère).docx">
+                                <label for="doc_abs_ann4">APG Allocation à l'autre parent (au père ou à l'épouse de la mère).docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann5" name="expectedDocuments" value="APG Allocations de maternité.docx">
+                                <label for="doc_abs_ann5">APG Allocations de maternité.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann6" name="expectedDocuments" value="APG Allocations de prise en charge enfants.docx">
+                                <label for="doc_abs_ann6">APG Allocations de prise en charge enfants.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann7" name="expectedDocuments" value="Incapacité de travail.docx">
+                                <label for="doc_abs_ann7">Incapacité de travail.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann8" name="expectedDocuments" value="Jours sans contrôle.docx">
+                                <label for="doc_abs_ann8">Jours sans contrôle.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann9" name="expectedDocuments" value="OFAS">
+                                <label for="doc_abs_ann9">OFAS</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann10" name="expectedDocuments" value="DFAS">
+                                <label for="doc_abs_ann10">DFAS</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann11" name="expectedDocuments" value="OFSO">
+                                <label for="doc_abs_ann11">OFSO</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann12" name="expectedDocuments" value="SUVA">
+                                <label for="doc_abs_ann12">SUVA</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann13" name="expectedDocuments" value="Sécurité social CHSS">
+                                <label for="doc_abs_ann13">Sécurité social CHSS</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann14" name="expectedDocuments" value="AVS/AI Allocation à l'autre parent AAP">
+                                <label for="doc_abs_ann14">AVS/AI Allocation à l'autre parent AAP</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann15" name="expectedDocuments" value="AVS/AI Allocation de maternité AMat">
+                                <label for="doc_abs_ann15">AVS/AI Allocation de maternité AMat</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann16" name="expectedDocuments" value="AVS/AI Allocation de prise en charge APC">
+                                <label for="doc_abs_ann16">AVS/AI Allocation de prise en charge APC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann17" name="expectedDocuments" value="MAR 009 Incapacité de travail">
+                                <label for="doc_abs_ann17">MAR 009 Incapacité de travail</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_abs_ann18" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_abs_ann18">MAR 005 Événement</label>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Contrôle -->
-                    <h4 style="color: #27ae60; margin: 15px 0 10px 0; font-size: 1.1em;">🔍 Contrôle</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl1" name="expectedDocuments" value="AAP examen.docx">
-                            <label for="doc_ctrl1">AAP examen.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl2" name="expectedDocuments" value="Activité indépendante durable.docx">
-                            <label for="doc_ctrl2">Activité indépendante durable.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl3" name="expectedDocuments" value="Checklist AAP.docx">
-                            <label for="doc_ctrl3">Checklist AAP.docx</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl4" name="expectedDocuments" value="Recherches d'emploi avant chômage">
-                            <label for="doc_ctrl4">Recherches d'emploi avant chômage</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl5" name="expectedDocuments" value="RPE - Arrêt du 15 août 2017 - CHAS.pdf">
-                            <label for="doc_ctrl5">RPE - Arrêt du 15 août 2017 - CHAS.pdf</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl6" name="expectedDocuments" value="RPE - Note diminution en cas d'incapacité partiel">
-                            <label for="doc_ctrl6">RPE - Note diminution en cas d'incapacité partiel</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl7" name="expectedDocuments" value="DOC 010 Note DJ - Recherches d'emploi avant chômage">
-                            <label for="doc_ctrl7">DOC 010 Note DJ - Recherches d'emploi avant chômage</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl8" name="expectedDocuments" value="MAR 011 Demande évaluation aptitude DJ">
-                            <label for="doc_ctrl8">MAR 011 Demande évaluation aptitude DJ</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_ctrl9" name="expectedDocuments" value="MAR 008 RPE Contrôle">
-                            <label for="doc_ctrl9">MAR 008 RPE Contrôle</label>
+                    <!-- ANNULATION -->
+                    <div class="subtheme-section annulation">
+                        <h4 style="color: #ef4444; margin: 0 0 15px 0; font-size: 1.2em;">❌ ANNULATION</h4>
+                        
+                        <!-- Annulation d'un dossier -->
+                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Annulation d'un dossier</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ann1" name="expectedDocuments" value="Effectuer une annulation.docx">
+                                <label for="doc_ann1">Effectuer une annulation.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ann2" name="expectedDocuments" value="DOC 006 Annulation dossiers morts et délais">
+                                <label for="doc_ann2">DOC 006 Annulation dossiers morts et délais</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ann3" name="expectedDocuments" value="MAR 003 Annulation dossier DE">
+                                <label for="doc_ann3">MAR 003 Annulation dossier DE</label>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Autres -->
-                    <h4 style="color: #8e44ad; margin: 15px 0 10px 0; font-size: 1.1em;">📂 Autres</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_aut1" name="expectedDocuments" value="QFAS - Allocation à l'autre parent AAP">
-                            <label for="doc_aut1">QFAS - Allocation à l'autre parent AAP</label>
+                    <!-- CONSEIL -->
+                    <div class="subtheme-section conseil">
+                        <h4 style="color: #f59e0b; margin: 0 0 15px 0; font-size: 1.2em;">💡 CONSEIL</h4>
+                        
+                        <!-- Diagnostic d'insertion -->
+                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Diagnostic d'insertion</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_diag1" name="expectedDocuments" value="1er entretien de conseil (Diag).docx">
+                                <label for="doc_cons_diag1">1er entretien de conseil (Diag).docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_diag2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_diag2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_diag3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_diag3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_diag4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_diag4">MAR 005 Événement</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_aut2" name="expectedDocuments" value="AVS/AI Allocation de maternité autre parent AAP">
-                            <label for="doc_aut2">AVS/AI Allocation de maternité autre parent AAP</label>
+                        
+                        <!-- Évaluation approfondie -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Évaluation approfondie</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_eval1" name="expectedDocuments" value="Évaluation approfondie.docx">
+                                <label for="doc_cons_eval1">Évaluation approfondie.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_eval2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_eval2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_eval3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_eval3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_eval4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_eval4">MAR 005 Événement</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_aut3" name="expectedDocuments" value="AVS/AI Allocation d'adoption Afpad">
-                            <label for="doc_aut3">AVS/AI Allocation d'adoption Afpad</label>
+                        
+                        <!-- Fin de droit -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Fin de droit</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_fin1" name="expectedDocuments" value="Fin d'indemnisation.docx">
+                                <label for="doc_cons_fin1">Fin d'indemnisation.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_fin2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_fin2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_fin3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_fin3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_fin4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_fin4">MAR 005 Événement</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_aut4" name="expectedDocuments" value="AVS/AI Allocation de prise en charge APC">
-                            <label for="doc_aut4">AVS/AI Allocation de prise en charge APC</label>
+                        
+                        <!-- Mesures d'insertion -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Mesures d'insertion</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_mes1" name="expectedDocuments" value="Mesures d'insertion.docx">
+                                <label for="doc_cons_mes1">Mesures d'insertion.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_mes2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_mes2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_mes3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_mes3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_mes4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_mes4">MAR 005 Événement</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_aut5" name="expectedDocuments" value="MAR 002 Incapacité de travail">
-                            <label for="doc_aut5">MAR 002 Incapacité de travail</label>
+                        
+                        <!-- Octroi STAFE -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Octroi STAFE</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_oct1" name="expectedDocuments" value="Octroyer un STAFE.docx">
+                                <label for="doc_cons_oct1">Octroyer un STAFE.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_oct2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_oct2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_oct3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_oct3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_oct4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_oct4">MAR 005 Événement</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="doc_aut6" name="expectedDocuments" value="Sécurité social CPSS">
-                            <label for="doc_aut6">Sécurité social CPSS</label>
+                        
+                        <!-- Stratégie de réinsertion -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Stratégie de réinsertion</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_str1" name="expectedDocuments" value="Établir la stratégie.docx">
+                                <label for="doc_cons_str1">Établir la stratégie.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_str2" name="expectedDocuments" value="Fiches pratiques - Critères d'employabilité.docx">
+                                <label for="doc_cons_str2">Fiches pratiques - Critères d'employabilité.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_str3" name="expectedDocuments" value="Nomenclature des objectifs.docx">
+                                <label for="doc_cons_str3">Nomenclature des objectifs.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_str4" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_str4">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_str5" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_str5">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_str6" name="expectedDocuments" value="MAR 006 Réinsertion Plan actions">
+                                <label for="doc_cons_str6">MAR 006 Réinsertion Plan actions</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Structure des entretiens -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Structure des entretiens</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_struct1" name="expectedDocuments" value="Structure des entretiens.docx">
+                                <label for="doc_cons_struct1">Structure des entretiens.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_struct2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_struct2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_struct3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_struct3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_struct4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_struct4">MAR 005 Événement</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Task Force Entretiens -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Task Force Entretiens</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_task1" name="expectedDocuments" value="Task Force EC.docx">
+                                <label for="doc_cons_task1">Task Force EC.docx</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Visioconférence -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Visioconférence</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_visio1" name="expectedDocuments" value="Guide et consignes.docx">
+                                <label for="doc_cons_visio1">Guide et consignes.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_visio2" name="expectedDocuments" value="DOC 007 Checklist EC">
+                                <label for="doc_cons_visio2">DOC 007 Checklist EC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_visio3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
+                                <label for="doc_cons_visio3">DOC 004 EC présentiel, visio ou téléphone</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_cons_visio4" name="expectedDocuments" value="MAR 005 Événement">
+                                <label for="doc_cons_visio4">MAR 005 Événement</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CONTRÔLE -->
+                    <div class="subtheme-section controle">
+                        <h4 style="color: #10b981; margin: 0 0 15px 0; font-size: 1.2em;">🔍 CONTRÔLE</h4>
+                        
+                        <!-- Aptitude au placement -->
+                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Aptitude au placement</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_apt1" name="expectedDocuments" value="AAP examen.docx">
+                                <label for="doc_ctrl_apt1">AAP examen.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_apt2" name="expectedDocuments" value="Activité indépendante durable.docx">
+                                <label for="doc_ctrl_apt2">Activité indépendante durable.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_apt3" name="expectedDocuments" value="Checklist AAP.docx">
+                                <label for="doc_ctrl_apt3">Checklist AAP.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_apt4" name="expectedDocuments" value="Recherches d'emploi.docx">
+                                <label for="doc_ctrl_apt4">Recherches d'emploi.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_apt5" name="expectedDocuments" value="MAR 011 Demande évaluation aptitude DJ">
+                                <label for="doc_ctrl_apt5">MAR 011 Demande évaluation aptitude DJ</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Restitution des recherches d'emploi -->
+                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Restitution des recherches d'emploi</h5>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_rest1" name="expectedDocuments" value="Recherches d'emploi.docx">
+                                <label for="doc_ctrl_rest1">Recherches d'emploi.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_rest2" name="expectedDocuments" value="RPE - Arrêt du 15 août 2017 - CHAS.pdf">
+                                <label for="doc_ctrl_rest2">RPE - Arrêt du 15 août 2017 - CHAS.pdf</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_rest3" name="expectedDocuments" value="RPE - Note diminution en cas d'incapacité partiel ou GI.docx">
+                                <label for="doc_ctrl_rest3">RPE - Note diminution en cas d'incapacité partiel ou GI.docx</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_rest4" name="expectedDocuments" value="DOC 010 Note DJ - Recherches d'emploi avant chômage">
+                                <label for="doc_ctrl_rest4">DOC 010 Note DJ - Recherches d'emploi avant chômage</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_rest5" name="expectedDocuments" value="MAR 008 RPE Contrôle">
+                                <label for="doc_ctrl_rest5">MAR 008 RPE Contrôle</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="doc_ctrl_rest6" name="expectedDocuments" value="MAR 010 Management transmission au DJ">
+                                <label for="doc_ctrl_rest6">MAR 010 Management transmission au DJ</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -632,7 +872,7 @@
             const formData = new FormData(form);
             
             // Vérification des champs obligatoires
-            const required = ['userName', 'questionNum', 'subTheme', 'questionAsked', 'botResponse'];
+            const required = ['userName', 'questionNum', 'questionAsked', 'botResponse'];
             const missing = required.filter(field => !formData.get(field));
             
             // Vérification des documents (au moins un coché)
@@ -642,6 +882,10 @@
             // Vérification des thèmes (au moins un coché)
             const themes = Array.from(document.querySelectorAll('input[name="themes"]:checked')).map(cb => cb.value);
             if (themes.length === 0) missing.push('themes');
+            
+            // Vérification des sous-thèmes (au moins un coché)
+            const subThemes = Array.from(document.querySelectorAll('input[name="subThemes"]:checked')).map(cb => cb.value);
+            if (subThemes.length === 0) missing.push('subThemes');
             
             if (missing.length > 0) {
                 showMessage('❌ Veuillez remplir tous les champs obligatoires', 'warning');
@@ -655,7 +899,7 @@
                 userName: formData.get('userName'),
                 questionNum: formData.get('questionNum'),
                 themes: themes.join(', '),
-                subTheme: formData.get('subTheme'),
+                subThemes: subThemes.join(', '),
                 questionAsked: formData.get('questionAsked'),
                 botResponse: formData.get('botResponse'),
                 expectedDocuments: expectedDocs.join(', '),
@@ -759,7 +1003,7 @@
                     formData.append('entry.2124536108', question.userName || ''); // Email
                     formData.append('entry.1139809027', question.questionNum || ''); // Numéro question
                     formData.append('entry.1654220128', question.themes || ''); // Thèmes
-                    formData.append('entry.235677432', question.subTheme || ''); // Sous-thème
+                    formData.append('entry.235677432', question.subThemes || ''); // Sous-thèmes
                     formData.append('entry.620424104', question.questionAsked || ''); // Question posée
                     formData.append('entry.1896168519', question.botResponse || ''); // Réponse ChatBot
                     formData.append('entry.1217455196', question.expectedDocuments || ''); // Documents attendus
@@ -852,7 +1096,7 @@
                     doc.setFontSize(10);
                     doc.text(`Thèmes: ${q.themes || 'N/A'}`, 20, yPos);
                     yPos += 8;
-                    doc.text(`Sous-thème: ${q.subTheme || 'N/A'}`, 20, yPos);
+                    doc.text(`Sous-thèmes: ${q.subThemes || 'N/A'}`, 20, yPos);
                     yPos += 12;
                     
                     // Question posée (max 2 lignes)
