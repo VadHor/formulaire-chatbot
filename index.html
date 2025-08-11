@@ -51,9 +51,9 @@
     /* Modal */
     .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(2,6,23,.45);z-index:40;padding:20px}
     .modal.open{display:grid}
-    .modal .panel{max-width:1080px;width:100%;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(2,6,23,.25)}
+    .modal .panel{max-width:1080px;width:100%;max-height:90vh;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(2,6,23,.25);display:flex;flex-direction:column}
     .panel-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--brand);color:#fff}
-    .panel-body{padding:16px}
+    .panel-body{padding:16px;overflow:auto}
     .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
     .tools input[type=text], .tools select{width:auto}
     .cards{display:grid;gap:12px}
@@ -308,7 +308,7 @@
     const form = document.getElementById('form');
     const statusBar = document.getElementById('statusBar');
 
-    function updateProgress(){ fill.style.width = Math.min((data.length/MAX)*100,100)+'%'; count.textContent = data.length; }
+    function updateProgress(){ const emailEl=document.getElementById('email'); const email=(emailEl?emailEl.value.trim():''); const total=MAX; let n=data.length; if(email){ n=data.filter(x=>x.userName===email).length; } fill.style.width=Math.min((n/total)*100,100)+'%'; count.textContent=n; }
     function toast(msg,type='ok'){ statusBar.textContent=msg; statusBar.className='status '+(type==='ok'?'ok':type==='warn'?'warn':'err'); statusBar.style.display='block'; setTimeout(()=>statusBar.style.display='none',4000); window.scrollTo({top:0,behavior:'smooth'}); }
 
     // Next free number for this email
@@ -521,7 +521,7 @@
     document.getElementById('bClear').addEventListener('click', clearAll);
     document.getElementById('bView').addEventListener('click', openModal);
     document.getElementById('qnum').addEventListener('change', e=>{ qBadge.textContent=e.target.value||'1'; });
-    document.getElementById('email').addEventListener('input', e=>{ rememberEmail(e.target.value); });
+    document.getElementById('email').addEventListener('input', e=>{ rememberEmail(e.target.value); updateProgress(); }); });
     filter.addEventListener('change', renderCards); search.addEventListener('input', renderCards);
     window.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
@@ -537,6 +537,7 @@
       const remembered = recallEmail();
       if(remembered){ document.getElementById('email').value=remembered; const nf = nextFree(remembered); if(nf){ document.getElementById('qnum').value=String(nf); qBadge.textContent=String(nf); } }
       loadDraft();
+      updateProgress();
       if(data.length){ toast(`${data.length} question(s) déjà sauvegardée(s).`,'ok'); }
     })();
   </script>
