@@ -1,1577 +1,544 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test ChatBot - Formulaire de Collecte</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8fafc;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: #4f46e5;
-            color: white;
-            padding: 24px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-        
-        .form-content {
-            padding: 32px;
-        }
-        
-        .progress-bar {
-            background: #f1f5f9;
-            height: 6px;
-            border-radius: 3px;
-            margin-bottom: 24px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            background: #4f46e5;
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .question-group {
-            margin-bottom: 24px;
-            padding: 20px;
-            background: #fafbfc;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .question-group.active {
-            background: #f8faff;
-            border-color: #4f46e5;
-        }
-        
-        label {
-            display: block;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 6px;
-            font-size: 1em;
-        }
-        
-        .required {
-            color: #ef4444;
-        }
-        
-        input[type="text"], input[type="email"], select, textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 0.95em;
-            transition: all 0.2s ease;
-            background: white;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-        
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background: white;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb;
-            transition: all 0.2s ease;
-        }
-        
-        .checkbox-item:hover {
-            background: #f9fafb;
-            border-color: #d1d5db;
-        }
-        
-        .checkbox-item input[type="checkbox"] {
-            width: auto;
-            margin-right: 8px;
-            accent-color: #4f46e5;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .btn-save {
-            background: #f59e0b;
-            color: white;
-        }
-        
-        .btn-save:hover {
-            background: #d97706;
-            transform: translateY(-1px);
-        }
-        
-        .btn-send {
-            background: #8b5cf6;
-            color: white;
-        }
-        
-        .btn-send:hover {
-            background: #7c3aed;
-            transform: translateY(-1px);
-        }
-        
-        .btn-export {
-            background: #10b981;
-            color: white;
-        }
-        
-        .btn-export:hover {
-            background: #059669;
-            transform: translateY(-1px);
-        }
-        
-        .btn-clear {
-            background: #ef4444;
-            color: white;
-        }
-        
-        .btn-clear:hover {
-            background: #dc2626;
-            transform: translateY(-1px);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test ChatBot – Collecte (UX+)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root{
+      --bg:#f7f9fc;--card:#fff;--text:#0f172a;--muted:#64748b;--brand:#4f46e5;--ok:#10b981;--warn:#f59e0b;--err:#ef4444;--border:#e2e8f0;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    .container{max-width:940px;margin:24px auto;padding:0 16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,.05);overflow:hidden}
+    .header{background:var(--brand);color:#fff;padding:22px 24px}
+    .header h1{margin:0 0 6px 0;font-size:22px;font-weight:700}
+    .header p{margin:0;opacity:.9}
+    .content{padding:24px}
+    .bar{height:6px;background:#eaf0ff;border-radius:3px;overflow:hidden;margin-bottom:18px}
+    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#7c3aed)}
+    .group{border:1px solid var(--border);border-radius:12px;padding:16px 16px 10px;margin-bottom:14px;background:#fbfcff}
+    .group h4{margin:0 0 8px;font-size:15px}
+    .help{font-size:12px;color:var(--muted);margin:4px 0 10px}
+    label{font-weight:600;display:block;margin-bottom:6px}
+    .req{color:var(--err)}
+    input[type=email],select,textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:#fff}
+    textarea{min-height:110px;resize:vertical}
+    input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(79,70,229,.12);border-color:var(--brand)}
+    .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    .check{display:flex;align-items:center;gap:8px;border:1px solid var(--border);padding:8px 10px;border-radius:10px;background:#fff}
+    .row{display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start}
+    .muted{color:var(--muted)}
+    .buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px}
+    button{border:0;border-radius:10px;padding:12px 16px;font-weight:600;cursor:pointer;transition:transform .06s ease,opacity .2s}
+    button:active{transform:translateY(1px)}
+    .b-save{background:#f59e0b;color:#fff}
+    .b-view{background:#3b82f6;color:#fff}
+    .b-export{background:#10b981;color:#fff}
+    .b-send{background:#8b5cf6;color:#fff}
+    .b-clear{background:#ef4444;color:#fff}
+    .status{margin:12px 0 0;padding:10px;border-radius:10px;font-weight:600}
+    .ok{background:#ecfdf5;color:#065f46;border:1px solid #bbf7d0}
+    .warn{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+    .err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+    .counter{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;margin-bottom:8px}
+    .chip{display:inline-block;padding:3px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border)}
+    .chip.sent{background:#ecfdf5;color:#065f46;border-color:#bbf7d0}
+    .chip.draft{background:#f1f5f9;color:#334155}
 
-        .btn-view {
-            background: #3b82f6;
-            color: white;
-        }
-        
-        .btn-view:hover {
-            background: #2563eb;
-            transform: translateY(-1px);
-        }
-        
-        .status-message {
-            text-align: center;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-        
-        .success {
-            background: #f0fdf4;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-        
-        .warning {
-            background: #fffbeb;
-            color: #92400e;
-            border: 1px solid #fde68a;
-        }
-        
-        .question-counter {
-            background: #4f46e5;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            display: inline-block;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-        
-        .help-text {
-            font-size: 0.85em;
-            color: #6b7280;
-            margin-top: 4px;
-            font-style: normal;
-        }
-        
-        .subtheme-section {
-            margin: 16px 0;
-            padding: 16px;
-            background: #fefefe;
-            border-radius: 8px;
-            border-left: 3px solid;
-        }
-        
-        .subtheme-section.absences { border-left-color: #3b82f6; }
-        .subtheme-section.annulation { border-left-color: #ef4444; }
-        .subtheme-section.conseil { border-left-color: #f59e0b; }
-        .subtheme-section.controle { border-left-color: #10b981; }
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(2,6,23,.45);z-index:40;padding:20px}
+    .modal.open{display:grid}
+    .modal .panel{max-width:1080px;width:100%;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(2,6,23,.25)}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--brand);color:#fff}
+    .panel-body{padding:16px}
+    .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+    .tools input[type=text], .tools select{width:auto}
+    .cards{display:grid;gap:12px}
+    .card-q{border:1px solid var(--border);border-radius:12px;padding:14px;background:#fbfcff}
+    .card-q h3{margin:0 0 6px;font-size:16px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+    .krow{display:grid;grid-template-columns:120px 1fr;gap:10px}
+    .long{max-height:64px;overflow:hidden;position:relative}
+    .long.expanded{max-height:none}
+    .link{color:#1d4ed8;cursor:pointer;font-size:12px;text-decoration:underline;margin-top:6px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .sml{padding:8px 10px;border-radius:8px;font-size:12px}
 
-        /* Styles pour la modal des questions sauvegardées */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 0;
-            border: none;
-            width: 90%;
-            max-width: 1000px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            max-height: 80vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-header {
-            background: #4f46e5;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.5em;
-        }
-
-        .close {
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-
-        .close:hover,
-        .close:focus {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .modal-body {
-            padding: 20px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .questions-summary {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .summary-item {
-            text-align: center;
-            flex: 1;
-        }
-
-        .summary-number {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #4f46e5;
-            display: block;
-        }
-
-        .summary-label {
-            font-size: 0.9em;
-            color: #6b7280;
-        }
-
-        .question-card {
-            background: #fafbfc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .question-card:hover {
-            border-color: #4f46e5;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .question-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #4f46e5;
-            margin: 0;
-        }
-
-        .question-date {
-            color: #6b7280;
-            font-size: 0.9em;
-        }
-
-        .question-details {
-            display: grid;
-            gap: 10px;
-        }
-
-        .detail-row {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 10px;
-            align-items: start;
-        }
-
-        .detail-label {
-            font-weight: 500;
-            color: #374151;
-            font-size: 0.9em;
-        }
-
-        .detail-content {
-            color: #6b7280;
-            word-break: break-word;
-            font-size: 0.9em;
-        }
-
-        .detail-content.long {
-            max-height: 60px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .detail-content.long.expanded {
-            max-height: none;
-        }
-
-        .expand-btn {
-            color: #4f46e5;
-            cursor: pointer;
-            font-size: 0.8em;
-            margin-top: 5px;
-            text-decoration: underline;
-        }
-
-        .expand-btn:hover {
-            color: #7c3aed;
-        }
-
-        .no-questions {
-            text-align: center;
-            padding: 40px 20px;
-            color: #6b7280;
-        }
-
-        .no-questions h3 {
-            margin-bottom: 10px;
-            color: #374151;
-        }
-        
-        @media (max-width: 768px) {
-            .form-content {
-                padding: 20px;
-            }
-            
-            .button-group {
-                flex-direction: column;
-            }
-            
-            button {
-                width: 100%;
-                margin: 5px 0;
-            }
-
-            .modal-content {
-                margin: 10px;
-                width: calc(100% - 20px);
-                max-height: 90vh;
-            }
-
-            .questions-summary {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .detail-row {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    @media (max-width:720px){
+      .row,.krow{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🤖 Test ChatBot - Collecte de données</h1>
-            <p>Formulaire pour l'évaluation des réponses du ChatBot</p>
-        </div>
-        
-        <div class="form-content">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1>Test ChatBot – Collecte des questions</h1>
+        <p>Enregistrez jusqu’à 5 questions, exportez en PDF et envoyez vers Google Forms.</p>
+      </div>
+      <div class="content">
+        <div class="bar"><div id="progressFill" class="fill"></div></div>
+        <div id="status"></div>
+
+        <form id="form">
+          <div class="group">
+            <label for="email">Nom et e‑mail <span class="req">*</span></label>
+            <input type="email" id="email" name="userName" placeholder="prenom.nom@entreprise.com" required />
+            <div class="help">Votre e‑mail est mémorisé pour les prochaines questions.</div>
+          </div>
+
+          <div class="group">
+            <div class="counter">Question <span id="qBadge">1</span> sur 5</div>
+            <label for="qnum">Numéro de la question <span class="req">*</span></label>
+            <select id="qnum" name="questionNum" required>
+              <option value="">Sélectionnez…</option>
+              <option value="1">Question 1</option>
+              <option value="2">Question 2</option>
+              <option value="3">Question 3</option>
+              <option value="4">Question 4</option>
+              <option value="5">Question 5</option>
+            </select>
+          </div>
+
+          <div class="group">
+            <label>Thèmes concernés <span class="req">*</span></label>
+            <div class="help">Cochez tous les thèmes abordés</div>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="themes" value="Absences"/> Absences</label>
+              <label class="check"><input type="checkbox" name="themes" value="Annulation"/> Annulation</label>
+              <label class="check"><input type="checkbox" name="themes" value="Conseil"/> Conseil</label>
+              <label class="check"><input type="checkbox" name="themes" value="Contrôle"/> Contrôle</label>
             </div>
-            
-            <div id="statusMessage"></div>
-            
-            <form id="chatbotForm">
-                <!-- Informations générales -->
-                <div class="question-group">
-                    <label for="userName">Nom et Email <span class="required">*</span></label>
-                    <input type="email" id="userName" name="userName" required 
-                           placeholder="prenom.nom@entreprise.com">
-                </div>
-                
-                <!-- Question en cours -->
-                <div class="question-group">
-                    <div class="question-counter">Question <span id="questionNumber">1</span> sur 5</div>
-                    <label for="questionNum">Numéro de la question <span class="required">*</span></label>
-                    <select id="questionNum" name="questionNum" required>
-                        <option value="">Sélectionnez...</option>
-                        <option value="1">Question 1</option>
-                        <option value="2">Question 2</option>
-                        <option value="3">Question 3</option>
-                        <option value="4">Question 4</option>
-                        <option value="5">Question 5</option>
-                    </select>
-                </div>
-                
-                <!-- Thèmes concernés -->
-                <div class="question-group">
-                    <label>Thèmes concernés par cette question <span class="required">*</span></label>
-                    <p class="help-text">Cochez tous les thèmes que votre question aborde</p>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="theme1" name="themes" value="Absences">
-                            <label for="theme1">Absences</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="theme2" name="themes" value="Annulation">
-                            <label for="theme2">Annulation</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="theme3" name="themes" value="Conseil">
-                            <label for="theme3">Conseil</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="theme4" name="themes" value="Contrôle">
-                            <label for="theme4">Contrôle</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Sous-thèmes concernés -->
-                <div class="question-group">
-                    <label>Sous-thèmes concernés par cette question <span class="required">*</span></label>
-                    <p class="help-text">Cochez tous les sous-thèmes que votre question aborde</p>
-                    
-                    <!-- Absences -->
-                    <h4 style="color: #3b82f6; margin: 15px 0 10px 0; font-size: 1.1em;">📋 Absences</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme1" name="subThemes" value="Absence entretien">
-                            <label for="subtheme1">Absence entretien</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme2" name="subThemes" value="Annonce d'une absence">
-                            <label for="subtheme2">Annonce d'une absence</label>
-                        </div>
-                    </div>
-                    
-                    <!-- Annulation -->
-                    <h4 style="color: #ef4444; margin: 15px 0 10px 0; font-size: 1.1em;">❌ Annulation</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme3" name="subThemes" value="Annulation d'un dossier">
-                            <label for="subtheme3">Annulation d'un dossier</label>
-                        </div>
-                    </div>
-                    
-                    <!-- Conseil -->
-                    <h4 style="color: #f59e0b; margin: 15px 0 10px 0; font-size: 1.1em;">💡 Conseil</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme4" name="subThemes" value="Diagnostic d'insertion">
-                            <label for="subtheme4">Diagnostic d'insertion</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme5" name="subThemes" value="Évaluation approfondie">
-                            <label for="subtheme5">Évaluation approfondie</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme6" name="subThemes" value="Fin de droit">
-                            <label for="subtheme6">Fin de droit</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme7" name="subThemes" value="Mesures d'insertion">
-                            <label for="subtheme7">Mesures d'insertion</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme8" name="subThemes" value="Octroi STAFE">
-                            <label for="subtheme8">Octroi STAFE</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme9" name="subThemes" value="Stratégie de réinsertion">
-                            <label for="subtheme9">Stratégie de réinsertion</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme10" name="subThemes" value="Structure des entretiens">
-                            <label for="subtheme10">Structure des entretiens</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme11" name="subThemes" value="Task Force Entretiens">
-                            <label for="subtheme11">Task Force Entretiens</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme12" name="subThemes" value="Visioconférence">
-                            <label for="subtheme12">Visioconférence</label>
-                        </div>
-                    </div>
-                    
-                    <!-- Contrôle -->
-                    <h4 style="color: #10b981; margin: 15px 0 10px 0; font-size: 1.1em;">🔍 Contrôle</h4>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme13" name="subThemes" value="Aptitude au placement">
-                            <label for="subtheme13">Aptitude au placement</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="subtheme14" name="subThemes" value="Restitution des recherches d'emploi">
-                            <label for="subtheme14">Restitution des recherches d'emploi</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question posée -->
-                <div class="question-group">
-                    <label for="questionAsked">Question posée au ChatBot <span class="required">*</span></label>
-                    <p class="help-text">Copiez-collez exactement la question que vous avez posée</p>
-                    <textarea id="questionAsked" name="questionAsked" required 
-                              placeholder="Coller votre question ici..."></textarea>
-                </div>
-                
-                <!-- Réponse reçue -->
-                <div class="question-group">
-                    <label for="botResponse">Réponse reçue du ChatBot <span class="required">*</span></label>
-                    <p class="help-text">Copiez-collez la réponse complète du ChatBot</p>
-                    <textarea id="botResponse" name="botResponse" required 
-                              placeholder="Coller la réponse du ChatBot ici..."></textarea>
-                </div>
-                
-                <!-- Documents de référence attendus -->
-                <div class="question-group">
-                    <label>Documents de référence attendus <span class="required">*</span></label>
-                    <p class="help-text">Cochez tous les documents qui devraient être la référence pour cette réponse</p>
-                    
-                    <!-- ABSENCES -->
-                    <div class="subtheme-section absences">
-                        <h4 style="color: #3b82f6; margin: 0 0 15px 0; font-size: 1.2em;">📋 ABSENCES</h4>
-                        
-                        <!-- Absence entretien -->
-                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Absence entretien</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ent1" name="expectedDocuments" value="Entretien avant MMT.docx">
-                                <label for="doc_abs_ent1">Entretien avant MMT.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ent2" name="expectedDocuments" value="DOC 002 Absences EC tableau synthèse.docx">
-                                <label for="doc_abs_ent2">DOC 002 Absences EC tableau synthèse.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ent3" name="expectedDocuments" value="MAR 010 Management transmission au DJ">
-                                <label for="doc_abs_ent3">MAR 010 Management transmission au DJ</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ent4" name="expectedDocuments" value="MAR 003 Annulation dossier DE">
-                                <label for="doc_abs_ent4">MAR 003 Annulation dossier DE</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Annonce d'une absence -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Annonce d'une absence</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann1" name="expectedDocuments" value="Entretien de conseil (EC) après MMT">
-                                <label for="doc_abs_ann1">Entretien de conseil (EC) après MMT</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann2" name="expectedDocuments" value="Allégement de conseil et de contrôle.docx">
-                                <label for="doc_abs_ann2">Allégement de conseil et de contrôle.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann3" name="expectedDocuments" value="APG Adoption.pdf">
-                                <label for="doc_abs_ann3">APG Adoption.pdf</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann4" name="expectedDocuments" value="APG Allocation à l'autre parent (au père ou à l'épouse de la mère).docx">
-                                <label for="doc_abs_ann4">APG Allocation à l'autre parent (au père ou à l'épouse de la mère).docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann5" name="expectedDocuments" value="APG Allocations de maternité.docx">
-                                <label for="doc_abs_ann5">APG Allocations de maternité.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann6" name="expectedDocuments" value="APG Allocations de prise en charge enfants.docx">
-                                <label for="doc_abs_ann6">APG Allocations de prise en charge enfants.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann7" name="expectedDocuments" value="Incapacité de travail.docx">
-                                <label for="doc_abs_ann7">Incapacité de travail.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann8" name="expectedDocuments" value="Jours sans contrôle.docx">
-                                <label for="doc_abs_ann8">Jours sans contrôle.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann9" name="expectedDocuments" value="OFAS">
-                                <label for="doc_abs_ann9">OFAS</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann10" name="expectedDocuments" value="DFAS">
-                                <label for="doc_abs_ann10">DFAS</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann11" name="expectedDocuments" value="OFSO">
-                                <label for="doc_abs_ann11">OFSO</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann12" name="expectedDocuments" value="SUVA">
-                                <label for="doc_abs_ann12">SUVA</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann13" name="expectedDocuments" value="Sécurité social CHSS">
-                                <label for="doc_abs_ann13">Sécurité social CHSS</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann14" name="expectedDocuments" value="AVS/AI Allocation à l'autre parent AAP">
-                                <label for="doc_abs_ann14">AVS/AI Allocation à l'autre parent AAP</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann15" name="expectedDocuments" value="AVS/AI Allocation de maternité AMat">
-                                <label for="doc_abs_ann15">AVS/AI Allocation de maternité AMat</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann16" name="expectedDocuments" value="AVS/AI Allocation de prise en charge APC">
-                                <label for="doc_abs_ann16">AVS/AI Allocation de prise en charge APC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann17" name="expectedDocuments" value="MAR 009 Incapacité de travail">
-                                <label for="doc_abs_ann17">MAR 009 Incapacité de travail</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_abs_ann18" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_abs_ann18">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- ANNULATION -->
-                    <div class="subtheme-section annulation">
-                        <h4 style="color: #ef4444; margin: 0 0 15px 0; font-size: 1.2em;">❌ ANNULATION</h4>
-                        
-                        <!-- Annulation d'un dossier -->
-                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Annulation d'un dossier</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ann1" name="expectedDocuments" value="Effectuer une annulation.docx">
-                                <label for="doc_ann1">Effectuer une annulation.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ann2" name="expectedDocuments" value="DOC 006 Annulation dossiers morts et délais">
-                                <label for="doc_ann2">DOC 006 Annulation dossiers morts et délais</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ann3" name="expectedDocuments" value="MAR 003 Annulation dossier DE">
-                                <label for="doc_ann3">MAR 003 Annulation dossier DE</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- CONSEIL -->
-                    <div class="subtheme-section conseil">
-                        <h4 style="color: #f59e0b; margin: 0 0 15px 0; font-size: 1.2em;">💡 CONSEIL</h4>
-                        
-                        <!-- Diagnostic d'insertion -->
-                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Diagnostic d'insertion</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_diag1" name="expectedDocuments" value="1er entretien de conseil (Diag).docx">
-                                <label for="doc_cons_diag1">1er entretien de conseil (Diag).docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_diag2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_diag2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_diag3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_diag3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_diag4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_diag4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Évaluation approfondie -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Évaluation approfondie</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_eval1" name="expectedDocuments" value="Évaluation approfondie.docx">
-                                <label for="doc_cons_eval1">Évaluation approfondie.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_eval2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_eval2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_eval3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_eval3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_eval4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_eval4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Fin de droit -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Fin de droit</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_fin1" name="expectedDocuments" value="Fin d'indemnisation.docx">
-                                <label for="doc_cons_fin1">Fin d'indemnisation.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_fin2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_fin2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_fin3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_fin3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_fin4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_fin4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Mesures d'insertion -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Mesures d'insertion</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_mes1" name="expectedDocuments" value="Mesures d'insertion.docx">
-                                <label for="doc_cons_mes1">Mesures d'insertion.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_mes2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_mes2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_mes3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_mes3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_mes4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_mes4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Octroi STAFE -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Octroi STAFE</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_oct1" name="expectedDocuments" value="Octroyer un STAFE.docx">
-                                <label for="doc_cons_oct1">Octroyer un STAFE.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_oct2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_oct2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_oct3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_oct3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_oct4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_oct4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Stratégie de réinsertion -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Stratégie de réinsertion</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_str1" name="expectedDocuments" value="Établir la stratégie.docx">
-                                <label for="doc_cons_str1">Établir la stratégie.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_str2" name="expectedDocuments" value="Fiches pratiques - Critères d'employabilité.docx">
-                                <label for="doc_cons_str2">Fiches pratiques - Critères d'employabilité.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_str3" name="expectedDocuments" value="Nomenclature des objectifs.docx">
-                                <label for="doc_cons_str3">Nomenclature des objectifs.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_str4" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_str4">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_str5" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_str5">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_str6" name="expectedDocuments" value="MAR 006 Réinsertion Plan actions">
-                                <label for="doc_cons_str6">MAR 006 Réinsertion Plan actions</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Structure des entretiens -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Structure des entretiens</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_struct1" name="expectedDocuments" value="Structure des entretiens.docx">
-                                <label for="doc_cons_struct1">Structure des entretiens.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_struct2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_struct2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_struct3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_struct3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_struct4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_struct4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Task Force Entretiens -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Task Force Entretiens</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_task1" name="expectedDocuments" value="Task Force EC.docx">
-                                <label for="doc_cons_task1">Task Force EC.docx</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Visioconférence -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Visioconférence</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_visio1" name="expectedDocuments" value="Guide et consignes.docx">
-                                <label for="doc_cons_visio1">Guide et consignes.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_visio2" name="expectedDocuments" value="DOC 007 Checklist EC">
-                                <label for="doc_cons_visio2">DOC 007 Checklist EC</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_visio3" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone">
-                                <label for="doc_cons_visio3">DOC 004 EC présentiel, visio ou téléphone</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_cons_visio4" name="expectedDocuments" value="MAR 005 Événement">
-                                <label for="doc_cons_visio4">MAR 005 Événement</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- CONTRÔLE -->
-                    <div class="subtheme-section controle">
-                        <h4 style="color: #10b981; margin: 0 0 15px 0; font-size: 1.2em;">🔍 CONTRÔLE</h4>
-                        
-                        <!-- Aptitude au placement -->
-                        <h5 style="color: #374151; margin: 10px 0 8px 0;">Aptitude au placement</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_apt1" name="expectedDocuments" value="AAP examen.docx">
-                                <label for="doc_ctrl_apt1">AAP examen.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_apt2" name="expectedDocuments" value="Activité indépendante durable.docx">
-                                <label for="doc_ctrl_apt2">Activité indépendante durable.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_apt3" name="expectedDocuments" value="Checklist AAP.docx">
-                                <label for="doc_ctrl_apt3">Checklist AAP.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_apt4" name="expectedDocuments" value="Recherches d'emploi.docx">
-                                <label for="doc_ctrl_apt4">Recherches d'emploi.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_apt5" name="expectedDocuments" value="MAR 011 Demande évaluation aptitude DJ">
-                                <label for="doc_ctrl_apt5">MAR 011 Demande évaluation aptitude DJ</label>
-                            </div>
-                        </div>
-                        
-                        <!-- Restitution des recherches d'emploi -->
-                        <h5 style="color: #374151; margin: 15px 0 8px 0;">Restitution des recherches d'emploi</h5>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_rest1" name="expectedDocuments" value="Recherches d'emploi.docx">
-                                <label for="doc_ctrl_rest1">Recherches d'emploi.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_rest2" name="expectedDocuments" value="RPE - Arrêt du 15 août 2017 - CHAS.pdf">
-                                <label for="doc_ctrl_rest2">RPE - Arrêt du 15 août 2017 - CHAS.pdf</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_rest3" name="expectedDocuments" value="RPE - Note diminution en cas d'incapacité partiel ou GI.docx">
-                                <label for="doc_ctrl_rest3">RPE - Note diminution en cas d'incapacité partiel ou GI.docx</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_rest4" name="expectedDocuments" value="DOC 010 Note DJ - Recherches d'emploi avant chômage">
-                                <label for="doc_ctrl_rest4">DOC 010 Note DJ - Recherches d'emploi avant chômage</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_rest5" name="expectedDocuments" value="MAR 008 RPE Contrôle">
-                                <label for="doc_ctrl_rest5">MAR 008 RPE Contrôle</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="doc_ctrl_rest6" name="expectedDocuments" value="MAR 010 Management transmission au DJ">
-                                <label for="doc_ctrl_rest6">MAR 010 Management transmission au DJ</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Complément d'information -->
-                <div class="question-group">
-                    <label for="additionalInfo">Complément d'information</label>
-                    <p class="help-text">Précisions supplémentaires ou commentaires sur la réponse attendue (optionnel)</p>
-                    <textarea id="additionalInfo" name="additionalInfo" 
-                              placeholder="Informations complémentaires..."></textarea>
-                </div>
-                
-                <!-- Commentaires -->
-                <div class="question-group">
-                    <label for="comments">Commentaires additionnels</label>
-                    <p class="help-text">Remarques, suggestions, observations...</p>
-                    <textarea id="comments" name="comments" 
-                              placeholder="Commentaires optionnels..."></textarea>
-                </div>
-                
-                <div class="button-group">
-                    <button type="button" class="btn-save" onclick="saveForm()">
-                        💾 Sauvegarder cette question
-                    </button>
-                    <button type="button" class="btn-view" onclick="viewSavedQuestions()">
-                        👀 Voir mes questions (<span id="questionCount">0</span>)
-                    </button>
-                    <button type="button" class="btn-export" onclick="exportToPDF()">
-                        📄 Exporter en PDF
-                    </button>
-                    <button type="button" class="btn-send" onclick="exportToGoogleForms()">
-                        📤 Envoyer vers Google Forms
-                    </button>
-                    <button type="button" class="btn-clear" onclick="clearForm()">
-                        🗑️ Vider le formulaire
-                    </button>
-                </div>
-            </form>
-        </div>
+          </div>
+
+          <div class="group">
+            <label>Sous‑thèmes concernés <span class="req">*</span></label>
+            <div class="help">Cochez tous les sous‑thèmes pertinents</div>
+            <h4>Absences</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="subThemes" value="Absence entretien"/> Absence entretien</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Annonce d'une absence"/> Annonce d'une absence</label>
+            </div>
+            <h4>Annulation</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="subThemes" value="Annulation d'un dossier"/> Annulation d'un dossier</label>
+            </div>
+            <h4>Conseil</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="subThemes" value="Diagnostic d'insertion"/> Diagnostic d'insertion</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Évaluation approfondie"/> Évaluation approfondie</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Fin de droit"/> Fin de droit</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Mesures d'insertion"/> Mesures d'insertion</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Octroi STAFE"/> Octroi STAFE</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Stratégie de réinsertion"/> Stratégie de réinsertion</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Structure des entretiens"/> Structure des entretiens</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Task Force Entretiens"/> Task Force Entretiens</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Visioconférence"/> Visioconférence</label>
+            </div>
+            <h4>Contrôle</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="subThemes" value="Aptitude au placement"/> Aptitude au placement</label>
+              <label class="check"><input type="checkbox" name="subThemes" value="Restitution des recherches d'emploi"/> Restitution des recherches d'emploi</label>
+            </div>
+          </div>
+
+          <div class="group">
+            <label for="qasked">Question posée au ChatBot <span class="req">*</span></label>
+            <div class="help">Copiez‑collez exactement la question transmise</div>
+            <textarea id="qasked" name="questionAsked" required placeholder="Coller votre question ici…"></textarea>
+          </div>
+
+          <div class="group">
+            <label for="rbot">Réponse reçue du ChatBot <span class="req">*</span></label>
+            <div class="help">Copiez‑collez la réponse complète</div>
+            <textarea id="rbot" name="botResponse" required placeholder="Coller la réponse ici…"></textarea>
+          </div>
+
+          <div class="group">
+            <label>Documents de référence attendus <span class="req">*</span></label>
+            <div class="help">Sélectionnez les documents qui devraient servir de référence</div>
+            <h4>Absences – Absence entretien</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Entretien avant MMT.docx"/> Entretien avant MMT.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="DOC 002 Absences EC tableau synthèse.docx"/> DOC 002 Absences EC tableau synthèse.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 010 Management transmission au DJ"/> MAR 010 Management transmission au DJ</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 003 Annulation dossier DE"/> MAR 003 Annulation dossier DE</label>
+            </div>
+            <h4>Absences – Annonce d'une absence</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Entretien de conseil (EC) après MMT"/> Entretien de conseil (EC) après MMT</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Allégement de conseil et de contrôle.docx"/> Allégement de conseil et de contrôle.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="APG Adoption.pdf"/> APG Adoption.pdf</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="APG Allocation à l'autre parent (au père ou à l'épouse de la mère).docx"/> APG Allocation à l'autre parent (au père ou à l'épouse de la mère).docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="APG Allocations de maternité.docx"/> APG Allocations de maternité.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="APG Allocations de prise en charge enfants.docx"/> APG Allocations de prise en charge enfants.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Incapacité de travail.docx"/> Incapacité de travail.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Jours sans contrôle.docx"/> Jours sans contrôle.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="OFAS"/> OFAS</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="DFAS"/> DFAS</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="OFSO"/> OFSO</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="SUVA"/> SUVA</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Sécurité social CHSS"/> Sécurité social CHSS</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="AVS/AI Allocation à l'autre parent AAP"/> AVS/AI Allocation à l'autre parent AAP</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="AVS/AI Allocation de maternité AMat"/> AVS/AI Allocation de maternité AMat</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="AVS/AI Allocation de prise en charge APC"/> AVS/AI Allocation de prise en charge APC</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 009 Incapacité de travail"/> MAR 009 Incapacité de travail</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 005 Événement"/> MAR 005 Événement</label>
+            </div>
+            <h4>Annulation – Annulation d'un dossier</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Effectuer une annulation.docx"/> Effectuer une annulation.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="DOC 006 Annulation dossiers morts et délais"/> DOC 006 Annulation dossiers morts et délais</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 003 Annulation dossier DE"/> MAR 003 Annulation dossier DE</label>
+            </div>
+            <h4>Conseil – Diagnostic, évaluation, fin de droit, mesures, STAFE, stratégie, structure, TF, visio</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="1er entretien de conseil (Diag).docx"/> 1er entretien de conseil (Diag).docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="DOC 007 Checklist EC"/> DOC 007 Checklist EC</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="DOC 004 EC présentiel, visio ou téléphone"/> DOC 004 EC présentiel, visio ou téléphone</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 005 Événement"/> MAR 005 Événement</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Évaluation approfondie.docx"/> Évaluation approfondie.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Fin d'indemnisation.docx"/> Fin d'indemnisation.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Mesures d'insertion.docx"/> Mesures d'insertion.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Octroyer un STAFE.docx"/> Octroyer un STAFE.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Établir la stratégie.docx"/> Établir la stratégie.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Fiches pratiques - Critères d'employabilité.docx"/> Fiches pratiques – Critères d'employabilité.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Nomenclature des objectifs.docx"/> Nomenclature des objectifs.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 006 Réinsertion Plan actions"/> MAR 006 Réinsertion Plan actions</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Structure des entretiens.docx"/> Structure des entretiens.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Task Force EC.docx"/> Task Force EC.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Guide et consignes.docx"/> Guide et consignes.docx</label>
+            </div>
+            <h4>Contrôle – AAP & RPE</h4>
+            <div class="grid">
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="AAP examen.docx"/> AAP examen.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Activité indépendante durable.docx"/> Activité indépendante durable.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Checklist AAP.docx"/> Checklist AAP.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="Recherches d'emploi.docx"/> Recherches d'emploi.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 011 Demande évaluation aptitude DJ"/> MAR 011 Demande évaluation aptitude DJ</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="RPE - Arrêt du 15 août 2017 - CHAS.pdf"/> RPE – Arrêt du 15 août 2017 – CHAS.pdf</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="RPE - Note diminution en cas d'incapacité partiel ou GI.docx"/> RPE – Note diminution en cas d'incapacité partiel ou GI.docx</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="DOC 010 Note DJ - Recherches d'emploi avant chômage"/> DOC 010 Note DJ – Recherches d'emploi avant chômage</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 008 RPE Contrôle"/> MAR 008 RPE Contrôle</label>
+              <label class="check"><input type="checkbox" name="expectedDocuments" value="MAR 010 Management transmission au DJ"/> MAR 010 Management transmission au DJ</label>
+            </div>
+          </div>
+
+          <div class="group">
+            <label for="ainfo">Complément d'information</label>
+            <textarea id="ainfo" name="additionalInfo" placeholder="Précisions supplémentaires (optionnel)…"></textarea>
+          </div>
+
+          <div class="group">
+            <label for="comments">Commentaires additionnels</label>
+            <textarea id="comments" name="comments" placeholder="Remarques, suggestions (optionnel)…"></textarea>
+          </div>
+
+          <div class="buttons">
+            <button type="button" class="b-save" id="bSave">Sauvegarder</button>
+            <button type="button" class="b-view" id="bView">Voir mes questions (<span id="count">0</span>)</button>
+            <button type="button" class="b-export" id="bPDF">Exporter PDF</button>
+            <button type="button" class="b-send" id="bSend">Envoyer vers Google Forms</button>
+            <button type="button" class="b-clear" id="bClear">Vider les données</button>
+          </div>
+        </form>
+
+        <div id="statusBar" class="status" style="display:none"></div>
+      </div>
     </div>
+  </div>
 
-    <!-- Modal pour afficher les questions sauvegardées -->
-    <div id="questionsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📋 Mes Questions Sauvegardées</h2>
-                <span class="close" onclick="closeModal()">&times;</span>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <!-- Le contenu sera généré dynamiquement -->
-            </div>
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="panel">
+      <div class="panel-head">
+        <strong>Mes questions sauvegardées</strong>
+        <button class="sml" onclick="closeModal()" style="background:#fff;color:#111">Fermer</button>
+      </div>
+      <div class="panel-body">
+        <div class="tools">
+          <label class="check" style="border:none;padding:0;background:transparent"><span class="muted">Filtrer :</span></label>
+          <select id="filter">
+            <option value="all">Toutes</option>
+            <option value="sent">Envoyées</option>
+            <option value="draft">Non envoyées</option>
+          </select>
+          <input type="text" id="search" placeholder="Rechercher (question, réponse, doc, thème)…" />
         </div>
+        <div class="cards" id="cards"></div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Configuration Google Sheets
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaRphk7nGTff4Zmf1Uv-merKLCdsjupFXediFGNAPoi8BqRPqLOiItsP2MVpVStm82/exec';
-        
-        // Configuration Google Forms (URL mise à jour)
-        const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfnrld7MJR8uG4iiJDlbMDRcjTBWiwaN1gySWtsENVKS3I1FA/formResponse';
-        
-        let savedQuestions = JSON.parse(localStorage.getItem('chatbotQuestions') || '[]');
-        
-        // Mise à jour de la barre de progression
-        function updateProgress() {
-            const progress = Math.min((savedQuestions.length / 5) * 100, 100);
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
-        
-        // Mise à jour du compteur de questions
-        function updateQuestionCount() {
-            const count = savedQuestions.length;
-            document.getElementById('questionCount').textContent = count;
-        }
-        
-        // Affichage des messages de statut
-        function showMessage(message, type = 'success') {
-            const messageDiv = document.getElementById('statusMessage');
-            messageDiv.innerHTML = `<div class="${type}">${message}</div>`;
-            setTimeout(() => messageDiv.innerHTML = '', 5000);
-        }
-        
-        // Mise à jour du compteur de questions dans le formulaire
-        function updateQuestionCounter() {
-            const questionSelect = document.getElementById('questionNum');
-            const counter = document.getElementById('questionNumber');
-            
-            questionSelect.addEventListener('change', function() {
-                counter.textContent = this.value || '1';
-            });
-        }
+  <script>
+    // ==== Config ====
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfnrld7MJR8uG4iiJDlbMDRcjTBWiwaN1gySWtsENVKS3I1FA/formResponse';
+    const ENTRY = {
+      email:'entry.2124536108',
+      qnum:'entry.1139809027',
+      themes:'entry.1654220128',
+      subThemes:'entry.235677432',
+      qasked:'entry.620424104',
+      rbot:'entry.1896168519',
+      docs:'entry.1217455196',
+      ainfo:'entry.2014602471',
+      comments:'entry.1998814617'
+    };
+    const MAX = 5;
 
-        // Fonction pour ouvrir la modal des questions sauvegardées
-        function viewSavedQuestions() {
-            const modal = document.getElementById('questionsModal');
-            const modalBody = document.getElementById('modalBody');
-            
-            if (savedQuestions.length === 0) {
-                modalBody.innerHTML = `
-                    <div class="no-questions">
-                        <h3>Aucune question sauvegardée</h3>
-                        <p>Vous n'avez pas encore sauvegardé de questions. Remplissez le formulaire et cliquez sur "Sauvegarder cette question" pour commencer.</p>
-                    </div>
-                `;
-            } else {
-                // Générer le résumé
-                const userNames = [...new Set(savedQuestions.map(q => q.userName))];
-                const totalQuestions = savedQuestions.length;
-                const completedQuestions = new Set(savedQuestions.map(q => q.questionNum)).size;
-                
-                let summaryHTML = `
-                    <div class="questions-summary">
-                        <div class="summary-item">
-                            <span class="summary-number">${totalQuestions}</span>
-                            <span class="summary-label">Questions sauvegardées</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-number">${completedQuestions}</span>
-                            <span class="summary-label">Questions uniques</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-number">${userNames.length}</span>
-                            <span class="summary-label">Utilisateur(s)</span>
-                        </div>
-                    </div>
-                `;
-                
-                // Générer les cartes de questions (version simplifiée pour éviter les erreurs JavaScript)
-                let questionsHTML = '';
-                savedQuestions.forEach((question, index) => {
-                    const shortQuestion = question.questionAsked && question.questionAsked.length > 100 ? 
-                        question.questionAsked.substring(0, 100) + '...' : (question.questionAsked || 'N/A');
-                    const shortResponse = question.botResponse && question.botResponse.length > 100 ? 
-                        question.botResponse.substring(0, 100) + '...' : (question.botResponse || 'N/A');
-                    
-                    const encodedQuestion = encodeURIComponent(question.questionAsked || '');
-                    const encodedResponse = encodeURIComponent(question.botResponse || '');
-                    
-                    questionsHTML += `
-                        <div class="question-card">
-                            <div class="question-header">
-                                <h3 class="question-title">Question ${question.questionNum || 'N/A'}</h3>
-                                <span class="question-date">${question.date || 'N/A'}</span>
-                            </div>
-                            <div class="question-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">Utilisateur:</span>
-                                    <span class="detail-content">${question.userName || 'N/A'}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Thèmes:</span>
-                                    <span class="detail-content">${question.themes || 'N/A'}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Question:</span>
-                                    <span class="detail-content long" id="question-${index}">
-                                        ${shortQuestion}
-                                        ${question.questionAsked && question.questionAsked.length > 100 ? 
-                                            `<div class="expand-btn" onclick="toggleExpand('question-${index}', '${encodedQuestion}')">Voir plus</div>` : ''}
-                                    </span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Réponse:</span>
-                                    <span class="detail-content long" id="response-${index}">
-                                        ${shortResponse}
-                                        ${question.botResponse && question.botResponse.length > 100 ? 
-                                            `<div class="expand-btn" onclick="toggleExpand('response-${index}', '${encodedResponse}')">Voir plus</div>` : ''}
-                                    </span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Documents:</span>
-                                    <span class="detail-content">${question.expectedDocuments || 'Aucun document sélectionné'}</span>
-                                </div>
-                                ${question.additionalInfo ? `
-                                <div class="detail-row">
-                                    <span class="detail-label">Infos:</span>
-                                    <span class="detail-content">${question.additionalInfo}</span>
-                                </div>` : ''}
-                                ${question.comments ? `
-                                <div class="detail-row">
-                                    <span class="detail-label">Commentaires:</span>
-                                    <span class="detail-content">${question.comments}</span>
-                                </div>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                modalBody.innerHTML = summaryHTML + questionsHTML;
-            }
-            
-            modal.style.display = 'block';
-        }
+    // ==== Storage helpers ====
+    function loadAll(){
+      try{const raw=localStorage.getItem('chatbotQuestions');return raw?JSON.parse(raw):[]}catch(e){localStorage.removeItem('chatbotQuestions');return[]}
+    }
+    function saveAll(arr){
+      try{localStorage.setItem('chatbotQuestions',JSON.stringify(arr));return true}catch(e){toast("Impossible de sauvegarder (quota).",'err');return false}
+    }
+    function rememberEmail(v){ localStorage.setItem('chatbotUserEmail', v||''); }
+    function recallEmail(){ return localStorage.getItem('chatbotUserEmail')||''; }
 
-        // Fonction pour fermer la modal
-        function closeModal() {
-            document.getElementById('questionsModal').style.display = 'none';
-        }
+    let data = loadAll();
 
-        // Fonction pour développer/réduire le texte long (version simplifiée)
-        function toggleExpand(elementId, fullText) {
-            const element = document.getElementById(elementId);
-            if (element && element.classList.contains('expanded')) {
-                // Réduire
-                const shortText = fullText.length > 100 ? fullText.substring(0, 100) + '...' : fullText;
-                element.innerHTML = shortText + '<div class="expand-btn" onclick="toggleExpand(\'' + elementId + '\', \'' + encodeURIComponent(fullText) + '\')">Voir plus</div>';
-                element.classList.remove('expanded');
-            } else if (element) {
-                // Développer
-                element.innerHTML = decodeURIComponent(fullText) + '<div class="expand-btn" onclick="toggleExpand(\'' + elementId + '\', \'' + encodeURIComponent(fullText) + '\')">Voir moins</div>';
-                element.classList.add('expanded');
-            }
-        }
+    // ==== UI refs ====
+    const fill = document.getElementById('progressFill');
+    const count = document.getElementById('count');
+    const qBadge = document.getElementById('qBadge');
+    const form = document.getElementById('form');
+    const statusBar = document.getElementById('statusBar');
 
-        // Fermer la modal en cliquant à côté
-        window.onclick = function(event) {
-            const modal = document.getElementById('questionsModal');
-            if (event.target == modal) {
-                closeModal();
-            }
+    function updateProgress(){ fill.style.width = Math.min((data.length/MAX)*100,100)+'%'; count.textContent = data.length; }
+    function toast(msg,type='ok'){ statusBar.textContent=msg; statusBar.className='status '+(type==='ok'?'ok':type==='warn'?'warn':'err'); statusBar.style.display='block'; setTimeout(()=>statusBar.style.display='none',4000); window.scrollTo({top:0,behavior:'smooth'}); }
+
+    // Next free number for this email
+    function nextFree(email){
+      const taken = new Set(data.filter(x=>x.userName===email).map(x=>String(x.questionNum)));
+      for(let i=1;i<=MAX;i++){ if(!taken.has(String(i))) return i; }
+      return null;
+    }
+
+    // Load entry into form
+    function loadIntoForm(entry){
+      form.reset();
+      document.getElementById('email').value = entry.userName||'';
+      document.getElementById('qnum').value = String(entry.questionNum||'');
+      qBadge.textContent = String(entry.questionNum||'1');
+      // themes
+      (entry.themes||'').split(', ').filter(Boolean).forEach(v=>{
+        const el = [...document.querySelectorAll('input[name="themes"]')].find(x=>x.value===v); if(el) el.checked=true;
+      });
+      // subThemes
+      (entry.subThemes||'').split(', ').filter(Boolean).forEach(v=>{
+        const el = [...document.querySelectorAll('input[name="subThemes"]')].find(x=>x.value===v); if(el) el.checked=true;
+      });
+      // docs
+      (entry.expectedDocuments||'').split(/,\s*/).filter(Boolean).forEach(v=>{
+        const el = [...document.querySelectorAll('input[name="expectedDocuments"]')].find(x=>x.value===v); if(el) el.checked=true;
+      });
+      document.getElementById('qasked').value = entry.questionAsked||'';
+      document.getElementById('rbot').value = entry.botResponse||'';
+      document.getElementById('ainfo').value = entry.additionalInfo||'';
+      document.getElementById('comments').value = entry.comments||'';
+      toast('Question chargée pour édition');
+    }
+
+    // Collect current form values
+    function collect(){
+      const email = document.getElementById('email').value.trim();
+      const qnum = document.getElementById('qnum').value.trim();
+      const themes = [...document.querySelectorAll('input[name="themes"]:checked')].map(x=>x.value);
+      const sub = [...document.querySelectorAll('input[name="subThemes"]:checked')].map(x=>x.value);
+      const docs = [...document.querySelectorAll('input[name="expectedDocuments"]:checked')].map(x=>x.value);
+      const qasked = document.getElementById('qasked').value.trim();
+      const rbot = document.getElementById('rbot').value.trim();
+      const ainfo = document.getElementById('ainfo').value.trim();
+      const comments = document.getElementById('comments').value.trim();
+      return {userName:email,questionNum:qnum,themes:themes.join(', '),subThemes:sub.join(', '),expectedDocuments:docs.join(', '),questionAsked:qasked,botResponse:rbot,additionalInfo:ainfo,comments, date:new Date().toLocaleDateString('fr-CH')};
+    }
+
+    function validate(entry){
+      const miss=[];
+      if(!entry.userName) miss.push('e‑mail');
+      if(!entry.questionNum) miss.push('numéro de question');
+      if(!entry.questionAsked) miss.push('question');
+      if(!entry.botResponse) miss.push('réponse');
+      if(!entry.themes) miss.push('au moins un thème');
+      if(!entry.subThemes) miss.push('au moins un sous‑thème');
+      if(!entry.expectedDocuments) miss.push('au moins un document');
+      if(miss.length){ toast('Champs requis manquants : '+miss.join(', '),'warn'); return false; }
+      return true;
+    }
+
+    function save(){
+      const entry = collect();
+      if(!validate(entry)) return;
+      // check duplicate for this email+qnum
+      const idx = data.findIndex(x=>x.userName===entry.userName && String(x.questionNum)===String(entry.questionNum));
+      if(idx>-1){
+        if(confirm(`La question ${entry.questionNum} existe déjà pour ${entry.userName}. La remplacer ?`)){
+          entry.sentAt = data[idx].sentAt||undefined; // conserver statut d'envoi
+          data[idx]=entry; if(!saveAll(data)) return; toast(`Question ${entry.questionNum} mise à jour.`);
+        }else{
+          const nf = nextFree(entry.userName);
+          if(nf){ entry.questionNum = String(nf); data.push(entry); if(!saveAll(data)) return; toast(`Question enregistrée sous le numéro ${nf}.`); }
+          else { toast('Limite de 5 questions atteinte pour cet e‑mail.','warn'); return; }
         }
-        
-        // Sauvegarde d'une question
-        function saveForm() {
-            const form = document.getElementById('chatbotForm');
-            const formData = new FormData(form);
-            
-            // Vérification des champs obligatoires
-            const required = ['userName', 'questionNum', 'questionAsked', 'botResponse'];
-            const missing = required.filter(field => !formData.get(field));
-            
-            // Vérification des documents (au moins un coché)
-            const expectedDocs = Array.from(document.querySelectorAll('input[name="expectedDocuments"]:checked')).map(cb => cb.value);
-            if (expectedDocs.length === 0) missing.push('expectedDocuments');
-            
-            // Vérification des thèmes (au moins un coché)
-            const themes = Array.from(document.querySelectorAll('input[name="themes"]:checked')).map(cb => cb.value);
-            if (themes.length === 0) missing.push('themes');
-            
-            // Vérification des sous-thèmes (au moins un coché)
-            const subThemes = Array.from(document.querySelectorAll('input[name="subThemes"]:checked')).map(cb => cb.value);
-            if (subThemes.length === 0) missing.push('subThemes');
-            
-            if (missing.length > 0) {
-                showMessage('❌ Veuillez remplir tous les champs obligatoires', 'warning');
-                return;
-            }
-            
-            // Création de l'objet question
-            const question = {
-                id: Date.now(),
-                date: new Date().toLocaleDateString('fr-FR'),
-                userName: formData.get('userName'),
-                questionNum: formData.get('questionNum'),
-                themes: themes.join(', '),
-                subThemes: subThemes.join(', '),
-                questionAsked: formData.get('questionAsked'),
-                botResponse: formData.get('botResponse'),
-                expectedDocuments: expectedDocs.join(', '),
-                additionalInfo: formData.get('additionalInfo') || '',
-                comments: formData.get('comments') || ''
-            };
-            
-            // Vérification si cette question existe déjà (même utilisateur + même numéro)
-            const existingIndex = savedQuestions.findIndex(q => 
-                q.userName === question.userName && q.questionNum === question.questionNum
-            );
-            
-            if (existingIndex >= 0) {
-                savedQuestions[existingIndex] = question;
-                showMessage(`✅ Question ${question.questionNum} mise à jour avec succès !`);
-            } else {
-                savedQuestions.push(question);
-                showMessage(`✅ Question ${question.questionNum} sauvegardée avec succès !`);
-            }
-            
-            // Sauvegarde locale
-            localStorage.setItem('chatbotQuestions', JSON.stringify(savedQuestions));
-            updateProgress();
-            updateQuestionCount();
-            
-            // Réinitialiser le formulaire
-            setTimeout(() => {
-                form.reset();
-                updateProgress();
-            }, 1500);
-        }
-        
-        // Envoi vers Google Sheets
-        async function sendToGoogleSheets() {
-            if (savedQuestions.length === 0) {
-                showMessage('❌ Aucune question sauvegardée à envoyer', 'warning');
-                return;
-            }
-            
-            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'VOTRE_URL_SCRIPT_GOOGLE_ICI') {
-                showMessage('⚠️ URL Google Script non configurée. Contactez votre administrateur.', 'warning');
-                return;
-            }
-            
-            try {
-                showMessage('📤 Envoi en cours vers Google Sheets...', 'warning');
-                
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        questions: savedQuestions,
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent
-                    })
-                });
-                
-                if (response.ok) {
-                    const result = await response.text();
-                    showMessage('✅ Données envoyées avec succès vers Google Sheets !');
-                    
-                    // Option : vider les données locales après envoi réussi
-                    if (confirm('✅ Envoi réussi ! Voulez-vous vider les données locales ?')) {
-                        localStorage.removeItem('chatbotQuestions');
-                        savedQuestions = [];
-                        document.getElementById('chatbotForm').reset();
-                        updateProgress();
-                        updateQuestionCount();
-                        showMessage('🗑️ Données locales supprimées');
-                    }
-                } else {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
-                }
-                
-            } catch (error) {
-                console.error('Erreur envoi Google Sheets:', error);
-                showMessage('❌ Erreur lors de l\'envoi. Vérifiez votre connexion internet.', 'warning');
-            }
-        }
-        
-        // Export vers Google Forms
-        async function exportToGoogleForms() {
-            console.log('=== DÉBUT EXPORT GOOGLE FORMS ===');
-            
-            if (savedQuestions.length === 0) {
-                showMessage('❌ Aucune question sauvegardée à envoyer', 'warning');
-                return;
-            }
-            
-            try {
-                showMessage('📤 Envoi en cours vers Google Forms...', 'warning');
-                
-                let successCount = 0;
-                
-                for (const question of savedQuestions) {
-                    console.log('Envoi question:', question.questionNum, question);
-                    
-                    // Créer les données pour Google Forms avec vos vrais entry IDs
-                    const formData = new FormData();
-                    
-                    formData.append('entry.2124536108', question.userName || ''); // Email
-                    formData.append('entry.1139809027', question.questionNum || ''); // Numéro question
-                    formData.append('entry.1654220128', question.themes || ''); // Thèmes
-                    formData.append('entry.235677432', question.subThemes || ''); // Sous-thèmes
-                    formData.append('entry.620424104', question.questionAsked || ''); // Question posée
-                    formData.append('entry.1896168519', question.botResponse || ''); // Réponse ChatBot
-                    formData.append('entry.1217455196', question.expectedDocuments || ''); // Documents attendus
-                    formData.append('entry.2014602471', question.additionalInfo || ''); // Infos complémentaires
-                    formData.append('entry.1998814617', question.comments || ''); // Commentaires
-                    
-                    // Envoyer vers Google Forms (test sans no-cors)
-                    try {
-                        const response = await fetch(GOOGLE_FORM_URL, {
-                            method: 'POST',
-                            body: formData
-                            // Suppression du mode: 'no-cors' pour voir les vraies erreurs
-                        });
-                        
-                        console.log('Réponse du serveur:', response.status, response.statusText);
-                        
-                    } catch (fetchError) {
-                        console.error('Erreur fetch détaillée:', fetchError);
-                        // On continue quand même car Google Forms peut renvoyer une erreur CORS même si ça marche
-                    }
-                    
-                    successCount++;
-                    console.log(`✅ Question ${question.questionNum} envoyée avec succès`);
-                    
-                    // Petite pause entre les envois pour éviter la surcharge
-                    await new Promise(resolve => setTimeout(resolve, 800));
-                }
-                
-                showMessage(`✅ ${successCount} question(s) envoyée(s) avec succès vers Google Forms !`);
-                console.log('=== EXPORT GOOGLE FORMS RÉUSSI ===');
-                
-                // Option de vidage des données locales
-                if (confirm('✅ Envoi réussi ! Voulez-vous vider les données locales sauvegardées ?')) {
-                    localStorage.removeItem('chatbotQuestions');
-                    savedQuestions = [];
-                    document.getElementById('chatbotForm').reset();
-                    updateProgress();
-                    updateQuestionCount();
-                    showMessage('🗑️ Données locales supprimées');
-                }
-                
-            } catch (error) {
-                console.error('ERREUR Export Google Forms:', error);
-                showMessage(`❌ Erreur lors de l'envoi: ${error.message}`, 'warning');
-            }
-        }
-        
-        // Export PDF simplifié et robuste
-        function exportToPDF() {
-            console.log('=== DÉBUT EXPORT PDF SIMPLIFIÉ ===');
-            
-            if (savedQuestions.length === 0) {
-                showMessage('❌ Aucune question sauvegardée à exporter', 'warning');
-                return;
-            }
-            
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                doc.setFont('helvetica');
-                let yPos = 20;
-                
-                // Titre simple
-                doc.setFontSize(16);
-                doc.text('Test ChatBot - Réponses', 20, yPos);
-                yPos += 20;
-                
-                // Informations utilisateur
-                doc.setFontSize(12);
-                doc.text(`Utilisateur: ${savedQuestions[0].userName}`, 20, yPos);
-                yPos += 10;
-                doc.text(`Date: ${new Date().toLocaleDateString('fr-FR')}`, 20, yPos);
-                yPos += 10;
-                doc.text(`Questions: ${savedQuestions.length}`, 20, yPos);
-                yPos += 20;
-                
-                // Chaque question (version simplifiée)
-                savedQuestions.forEach((q, i) => {
-                    console.log(`Traitement question ${i + 1}`);
-                    
-                    // Nouvelle page si nécessaire
-                    if (yPos > 250) {
-                        doc.addPage();
-                        yPos = 20;
-                    }
-                    
-                    // Question
-                    doc.setFontSize(14);
-                    doc.text(`Question ${q.questionNum}`, 20, yPos);
-                    yPos += 15;
-                    
-                    doc.setFontSize(10);
-                    doc.text(`Thèmes: ${q.themes || 'N/A'}`, 20, yPos);
-                    yPos += 8;
-                    doc.text(`Sous-thèmes: ${q.subThemes || 'N/A'}`, 20, yPos);
-                    yPos += 12;
-                    
-                    // Question posée (max 2 lignes)
-                    doc.text('Question posée:', 20, yPos);
-                    yPos += 6;
-                    const qText = (q.questionAsked || 'N/A').substring(0, 100) + '...';
-                    doc.text(qText, 25, yPos);
-                    yPos += 12;
-                    
-                    // Réponse bot (max 2 lignes)  
-                    doc.text('Réponse ChatBot:', 20, yPos);
-                    yPos += 6;
-                    const botText = (q.botResponse || 'N/A').substring(0, 100) + '...';
-                    doc.text(botText, 25, yPos);
-                    yPos += 12;
-                    
-                    // Documents attendus avec bullet points corrigés
-                    doc.text('Documents de référence attendus:', 20, yPos);
-                    yPos += 8;
-                    
-                    console.log('Documents dans la question:', q.expectedDocuments);
-                    
-                    if (q.expectedDocuments && q.expectedDocuments.length > 0) {
-                        // Split correctement la liste de documents
-                        const docsList = q.expectedDocuments.includes(', ') ? 
-                            q.expectedDocuments.split(', ') : 
-                            q.expectedDocuments.split(',');
-                        
-                        console.log('Documents après split:', docsList);
-                        
-                        if (docsList.length > 0 && docsList[0].trim() !== '') {
-                            docsList.forEach((docName, index) => {
-                                console.log(`Document ${index + 1}:`, docName);
-                                
-                                if (docName && docName.trim()) {
-                                    // Nouvelle page si nécessaire
-                                    if (yPos > 250) {
-                                        doc.addPage();
-                                        yPos = 20;
-                                    }
-                                    
-                                    // Gérer les noms longs avec bullet point
-                                    let displayText = docName.trim();
-                                    if (displayText.length > 70) {
-                                        displayText = displayText.substring(0, 67) + '...';
-                                    }
-                                    doc.text('• ' + displayText, 25, yPos);
-                                    yPos += 6;
-                                }
-                            });
-                        } else {
-                            doc.text('• Aucun document sélectionné', 25, yPos);
-                            yPos += 6;
-                        }
-                    } else {
-                        doc.text('• Aucun document sélectionné', 25, yPos);
-                        yPos += 6;
-                    }
-                    yPos += 10;
-                    
-                    // Séparateur
-                    doc.setDrawColor(200, 200, 200);
-                    doc.line(20, yPos, 190, yPos);
-                    yPos += 15;
-                });
-                
-                // Sauvegarde
-                const fileName = `ChatBot_Export_${new Date().toISOString().split('T')[0]}.pdf`;
-                console.log('Sauvegarde:', fileName);
-                doc.save(fileName);
-                
-                showMessage('📄 PDF exporté avec succès !');
-                console.log('=== EXPORT RÉUSSI ===');
-                
-            } catch (error) {
-                console.error('Erreur export:', error);
-                showMessage('❌ Erreur: ' + error.message, 'warning');
-            }
-        }
-        
-        // Vider le formulaire et les données
-        function clearForm() {
-            if (confirm('⚠️ Êtes-vous sûr de vouloir vider toutes les données sauvegardées ?')) {
-                localStorage.removeItem('chatbotQuestions');
-                savedQuestions = [];
-                document.getElementById('chatbotForm').reset();
-                updateProgress();
-                updateQuestionCount();
-                showMessage('🗑️ Toutes les données ont été supprimées');
-            }
-        }
-        
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgress();
-            updateQuestionCounter();
-            updateQuestionCount();
-            
-            if (savedQuestions.length > 0) {
-                showMessage(`📊 ${savedQuestions.length} question(s) déjà sauvegardée(s)`);
-            }
-        });
-        
-        // Sauvegarde automatique en cas de fermeture accidentelle
-        window.addEventListener('beforeunload', function(e) {
-            const form = document.getElementById('chatbotForm');
-            const hasData = Array.from(new FormData(form)).some(([key, value]) => value.trim() !== '');
-            
-            if (hasData) {
-                const message = 'Vous avez des données non sauvegardées. Voulez-vous vraiment quitter ?';
-                e.returnValue = message;
-                return message;
-            }
-        });
-    </script>
+      }else{
+        if(data.length>=MAX){ toast(`Limite globale atteinte (${MAX}). Supprimez une entrée pour continuer.`,'warn'); return; }
+        data.push(entry); if(!saveAll(data)) return; toast(`Question ${entry.questionNum} sauvegardée.`);
+      }
+      updateProgress();
+      // prepare next: keep email, advance qnum, vider textes & cases
+      const email = entry.userName; rememberEmail(email);
+      const nf = nextFree(email); // peut être null si plein
+      document.getElementById('qasked').value='';
+      document.getElementById('rbot').value='';
+      document.getElementById('ainfo').value='';
+      document.getElementById('comments').value='';
+      document.querySelectorAll('input[name="themes"],input[name="subThemes"],input[name="expectedDocuments"]').forEach(el=>el.checked=false);
+      if(nf){ document.getElementById('qnum').value=String(nf); qBadge.textContent=String(nf);} else { qBadge.textContent=String(entry.questionNum); }
+    }
+
+    // Export PDF (résumé lisible)
+    function exportPDF(){
+      if(!data.length){ toast('Aucune question à exporter.','warn'); return; }
+      const { jsPDF } = window.jspdf; const doc = new jsPDF(); let y=18;
+      doc.setFont('helvetica',''); doc.setFontSize(16); doc.text('Test ChatBot – Export',14,y); y+=10;
+      doc.setFontSize(11); doc.text(`Utilisateur: ${data[0].userName||''}`,14,y); y+=6;
+      doc.text(`Date: ${new Date().toLocaleDateString('fr-CH')}`,14,y); y+=10;
+      data.forEach((q,i)=>{ if(y>275){ doc.addPage(); y=18; }
+        doc.setFontSize(13); doc.text(`Question ${q.questionNum}${q.sentAt?' (envoyée)':''}`,14,y); y+=6;
+        doc.setFontSize(10);
+        const lines=(t,w)=>doc.splitTextToSize(t||'N/A',w);
+        doc.text(`Thèmes: ${q.themes||'N/A'}`,14,y); y+=5;
+        doc.text(`Sous‑thèmes: ${q.subThemes||'N/A'}`,14,y); y+=5;
+        doc.text('Question :',14,y); y+=5; lines(q.questionAsked,180).forEach(l=>{doc.text(l,18,y); y+=5;});
+        doc.text('Réponse :',14,y); y+=5; lines(q.botResponse,180).forEach(l=>{doc.text(l,18,y); y+=5;});
+        doc.text('Documents :',14,y); y+=5; lines((q.expectedDocuments||'Aucun').split(',').map(s=>'• '+s.trim()).join('\n'),180).forEach(l=>{doc.text(l,18,y); y+=5;});
+        y+=4; doc.setDrawColor(220); doc.line(14,y,196,y); y+=6;
+      });
+      doc.save(`ChatBot_Export_${new Date().toISOString().slice(0,10)}.pdf`);
+      toast('PDF exporté.');
+    }
+
+    // Send to Google Forms (envoie toutes les non envoyées)
+    async function sendAll(){
+      if(!data.length){ toast('Aucune question à envoyer.','warn'); return; }
+      let toSend = data.filter(x=>!x.sentAt);
+      if(!toSend.length){ toast('Tout a déjà été envoyé.','ok'); return; }
+      toast(`Envoi de ${toSend.length} question(s)…`,'warn');
+      for(const q of toSend){
+        const fd = new FormData();
+        fd.append(ENTRY.email, q.userName||'');
+        fd.append(ENTRY.qnum, q.questionNum||'');
+        fd.append(ENTRY.themes, q.themes||'');
+        fd.append(ENTRY.subThemes, q.subThemes||'');
+        fd.append(ENTRY.qasked, q.questionAsked||'');
+        fd.append(ENTRY.rbot, q.botResponse||'');
+        fd.append(ENTRY.docs, q.expectedDocuments||'');
+        fd.append(ENTRY.ainfo, q.additionalInfo||'');
+        fd.append(ENTRY.comments, q.comments||'');
+        try{ await fetch(GOOGLE_FORM_URL,{method:'POST',body:fd}); q.sentAt = new Date().toISOString(); saveAll(data); }
+        catch(e){ /* Google Forms peut "répondre" sans CORS; on ignore l'erreur */ }
+        await new Promise(r=>setTimeout(r, 600));
+      }
+      toast('Envoi terminé.');
+      renderCards(); updateProgress();
+    }
+
+    // Clear all
+    function clearAll(){ if(confirm('Supprimer toutes les données locales ?')){ data=[]; saveAll(data); updateProgress(); count.textContent='0'; toast('Toutes les données ont été supprimées.'); }}
+
+    // Modal logic
+    const modal = document.getElementById('modal');
+    const cards = document.getElementById('cards');
+    const filter = document.getElementById('filter');
+    const search = document.getElementById('search');
+
+    function openModal(){ modal.classList.add('open'); renderCards(); }
+    function closeModal(){ modal.classList.remove('open'); }
+
+    function escHTML(s){ return (s||'').replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m])); }
+
+    function matchFilter(q){
+      const f = filter.value;
+      if(f==='sent' && !q.sentAt) return false;
+      if(f==='draft' && q.sentAt) return false;
+      const term = search.value.trim().toLowerCase();
+      if(!term) return true;
+      const hay = [q.questionAsked,q.botResponse,q.expectedDocuments,q.themes,q.subThemes].join('\n').toLowerCase();
+      return hay.includes(term);
+    }
+
+    function renderCards(){
+      if(!cards) return;
+      let list = loadAll(); // reload fresh
+      data = list; // keep in sync
+      const arr = list.filter(matchFilter);
+      if(!arr.length){ cards.innerHTML = '<div class="muted">Aucune entrée.</div>'; updateProgress(); return; }
+      cards.innerHTML = arr.map((q,i)=>{
+        const status = q.sentAt?'<span class="chip sent">Envoyée</span>':'<span class="chip draft">Brouillon</span>';
+        const short = (t)=>{ if(!t) return 'N/A'; return t.length>140? escHTML(t.slice(0,140))+"…" : escHTML(t); };
+        const id = q.userName+'__'+q.questionNum;
+        return `
+          <div class="card-q" data-id="${escHTML(id)}">
+            <h3>Question ${escHTML(q.questionNum||'')} ${status}</h3>
+            <div class="meta">
+              <span class="chip">${escHTML(q.userName||'')}</span>
+              <span class="chip">${escHTML(q.date||'')}</span>
+            </div>
+            <div class="krow"><div class="muted">Thèmes</div><div>${escHTML(q.themes||'—')}</div></div>
+            <div class="krow"><div class="muted">Sous‑thèmes</div><div>${escHTML(q.subThemes||'—')}</div></div>
+            <div class="krow"><div class="muted">Question</div>
+              <div class="long" id="q-${i}" data-full="${encodeURIComponent(q.questionAsked||'')}">${short(q.questionAsked)}${(q.questionAsked||'').length>140?'<div class="link" onclick="toggleLong(\'q-"+i+"\')">Voir plus</div>':''}</div>
+            </div>
+            <div class="krow"><div class="muted">Réponse</div>
+              <div class="long" id="r-${i}" data-full="${encodeURIComponent(q.botResponse||'')}">${short(q.botResponse)}${(q.botResponse||'').length>140?'<div class="link" onclick="toggleLong(\'r-"+i+"\')">Voir plus</div>':''}</div>
+            </div>
+            <div class="krow"><div class="muted">Documents</div><div>${escHTML(q.expectedDocuments||'—')}</div></div>
+            <div class="actions">
+              <button class="sml" onclick="editEntry('${encodeURIComponent(id)}')">Éditer</button>
+              <button class="sml" onclick="delEntry('${encodeURIComponent(id)}')" style="background:#fee2e2;color:#991b1b">Supprimer</button>
+              ${q.sentAt? '' : '<button class="sml" onclick="markSent(\''+encodeURIComponent(id)+'\')" style="background:#ecfdf5;color:#065f46">Marquer envoyée</button>'}
+            </div>
+          </div>`
+      }).join('');
+      updateProgress();
+    }
+
+    function getById(encoded){ const id=decodeURIComponent(encoded); const [u,qn]=id.split('__'); return data.findIndex(x=>x.userName===u && String(x.questionNum)===String(qn)); }
+    function editEntry(encoded){ const i=getById(encoded); if(i>-1){ loadIntoForm(data[i]); window.scrollTo({top:0,behavior:'smooth'}); } }
+    function delEntry(encoded){ const i=getById(encoded); if(i>-1 && confirm('Supprimer cette entrée ?')){ data.splice(i,1); saveAll(data); renderCards(); updateProgress(); toast('Entrée supprimée.'); } }
+    function markSent(encoded){ const i=getById(encoded); if(i>-1){ data[i].sentAt=new Date().toISOString(); saveAll(data); renderCards(); toast('Marquée comme envoyée.'); } }
+
+    function toggleLong(id){ const el=document.getElementById(id); if(!el) return; const full=decodeURIComponent(el.dataset.full||''); if(el.classList.contains('expanded')){ el.classList.remove('expanded'); el.innerHTML=escHTML(full.length>140?full.slice(0,140)+'…':full)+(full.length>140?'<div class="link" onclick="toggleLong(\''+id+'\')">Voir plus</div>':''); } else { el.classList.add('expanded'); el.innerHTML=escHTML(full)+'<div class="link" onclick="toggleLong(\''+id+'\')">Voir moins</div>'; } }
+
+    // ==== Events ====
+    document.getElementById('bSave').addEventListener('click', save);
+    document.getElementById('bPDF').addEventListener('click', exportPDF);
+    document.getElementById('bSend').addEventListener('click', sendAll);
+    document.getElementById('bClear').addEventListener('click', clearAll);
+    document.getElementById('bView').addEventListener('click', openModal);
+    document.getElementById('qnum').addEventListener('change', e=>{ qBadge.textContent=e.target.value||'1'; });
+    document.getElementById('email').addEventListener('input', e=>{ rememberEmail(e.target.value); });
+    filter.addEventListener('change', renderCards); search.addEventListener('input', renderCards);
+    window.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+
+    // Draft autosave – user friendly
+    const DRAFT_KEY='chatbotDraft';
+    function saveDraft(){ localStorage.setItem(DRAFT_KEY, JSON.stringify(collect())); }
+    function loadDraft(){ try{ const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null'); if(d && !data.find(x=>x.userName===d.userName && x.questionNum===d.questionNum)) { loadIntoForm(d); } }catch(_){} }
+    form.addEventListener('input', ()=>{ try{ saveDraft(); }catch(_){} });
+
+    // Init
+    (function init(){
+      updateProgress();
+      const remembered = recallEmail();
+      if(remembered){ document.getElementById('email').value=remembered; const nf = nextFree(remembered); if(nf){ document.getElementById('qnum').value=String(nf); qBadge.textContent=String(nf); } }
+      loadDraft();
+      if(data.length){ toast(`${data.length} question(s) déjà sauvegardée(s).`,'ok'); }
+    })();
+  </script>
 </body>
 </html>
