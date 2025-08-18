@@ -77,7 +77,7 @@
     <div class="card">
       <div class="header">
         <h1>Test ChatBot – Collecte des questions</h1>
-        <p>Enregistrez jusqu’à 5 questions, exportez en PDF et envoyez vers Google Forms.</p>
+        <p>Enregistrez jusqu'à 5 questions, exportez en PDF et envoyez vers Google Forms.</p>
       </div>
       <div class="content">
         <div class="bar"><div id="progressFill" class="fill"></div></div>
@@ -308,8 +308,25 @@
     const form = document.getElementById('form');
     const statusBar = document.getElementById('statusBar');
 
-    function updateProgress(){ const emailEl=document.getElementById('email'); const email=(emailEl?emailEl.value.trim():''); const total=MAX; let n=data.length; if(email){ n=data.filter(x=>x.userName===email).length; } fill.style.width=Math.min((n/total)*100,100)+'%'; count.textContent=n; }
-    function toast(msg,type='ok'){ statusBar.textContent=msg; statusBar.className='status '+(type==='ok'?'ok':type==='warn'?'warn':'err'); statusBar.style.display='block'; setTimeout(()=>statusBar.style.display='none',4000); window.scrollTo({top:0,behavior:'smooth'}); }
+    function updateProgress(){ 
+      const emailEl=document.getElementById('email'); 
+      const email=(emailEl?emailEl.value.trim():''); 
+      const total=MAX; 
+      let n=data.length; 
+      if(email){ 
+        n=data.filter(x=>x.userName===email).length; 
+      } 
+      fill.style.width=Math.min((n/total)*100,100)+'%'; 
+      count.textContent=n; 
+    }
+    
+    function toast(msg,type='ok'){ 
+      statusBar.textContent=msg; 
+      statusBar.className='status '+(type==='ok'?'ok':type==='warn'?'warn':'err'); 
+      statusBar.style.display='block'; 
+      setTimeout(()=>statusBar.style.display='none',4000); 
+      window.scrollTo({top:0,behavior:'smooth'}); 
+    }
 
     // Next free number for this email
     function nextFree(email){
@@ -508,7 +525,7 @@
     }
 
     function getById(encoded){ const id=decodeURIComponent(encoded); const [u,qn]=id.split('__'); return data.findIndex(x=>x.userName===u && String(x.questionNum)===String(qn)); }
-    function editEntry(encoded){ const i=getById(encoded); if(i>-1){ loadIntoForm(data[i]); window.scrollTo({top:0,behavior:'smooth'}); } }
+    function editEntry(encoded){ const i=getById(encoded); if(i>-1){ loadIntoForm(data[i]); closeModal(); window.scrollTo({top:0,behavior:'smooth'}); } }
     function delEntry(encoded){ const i=getById(encoded); if(i>-1 && confirm('Supprimer cette entrée ?')){ data.splice(i,1); saveAll(data); renderCards(); updateProgress(); toast('Entrée supprimée.'); } }
     function markSent(encoded){ const i=getById(encoded); if(i>-1){ data[i].sentAt=new Date().toISOString(); saveAll(data); renderCards(); toast('Marquée comme envoyée.'); } }
 
@@ -521,8 +538,9 @@
     document.getElementById('bClear').addEventListener('click', clearAll);
     document.getElementById('bView').addEventListener('click', openModal);
     document.getElementById('qnum').addEventListener('change', e=>{ qBadge.textContent=e.target.value||'1'; });
-    document.getElementById('email').addEventListener('input', e=>{ rememberEmail(e.target.value); updateProgress(); }); });
-    filter.addEventListener('change', renderCards); search.addEventListener('input', renderCards);
+    document.getElementById('email').addEventListener('input', e=>{ rememberEmail(e.target.value); updateProgress(); });
+    if(filter) filter.addEventListener('change', renderCards);
+    if(search) search.addEventListener('input', renderCards);
     window.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
 
     // Draft autosave – user friendly
@@ -535,7 +553,14 @@
     (function init(){
       updateProgress();
       const remembered = recallEmail();
-      if(remembered){ document.getElementById('email').value=remembered; const nf = nextFree(remembered); if(nf){ document.getElementById('qnum').value=String(nf); qBadge.textContent=String(nf); } }
+      if(remembered){ 
+        document.getElementById('email').value=remembered; 
+        const nf = nextFree(remembered); 
+        if(nf){ 
+          document.getElementById('qnum').value=String(nf); 
+          qBadge.textContent=String(nf); 
+        } 
+      }
       loadDraft();
       updateProgress();
       if(data.length){ toast(`${data.length} question(s) déjà sauvegardée(s).`,'ok'); }
